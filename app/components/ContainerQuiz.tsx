@@ -3,15 +3,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 
-interface Question {
-  id: number;
-  name: string;
-  answerA: string;
-  answerB: string;
-  answerC: string;
-  answerD: string;
-  correct: string;
-}
+
 
 const ContainerQuiz = () => {
   const [eventList, setEventList] = useState([]);
