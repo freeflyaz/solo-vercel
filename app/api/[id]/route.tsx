@@ -15,9 +15,9 @@ export async function GET(
       where: { order: Number(params.id) }
     });
 
-    console.log(params.id);
+    // console.log(params.id);
     const lang = request.nextUrl.searchParams.get('lang');
-    console.log(lang);
+    // console.log(lang);
     const userLanguage = lang;
 
     const textsToTranslate =[
@@ -29,13 +29,13 @@ export async function GET(
       question?.answerD,
       question?.correct
     ]
-    console.log(textsToTranslate);
+    // console.log(textsToTranslate);
 
     const filteredTextsToTranslate = textsToTranslate.filter((text) => text !== undefined) as string[];
 
     const translations = await translateText(filteredTextsToTranslate, userLanguage);
 
-    console.log(translations);
+    // console.log(translations);
 
     if (question) {
       question.name = translations[0];
