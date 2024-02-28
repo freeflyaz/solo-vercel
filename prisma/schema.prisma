@@ -1,14 +1,29 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
+}
+
+model Question {
+  id       String @id @map("_id")
+  order    Int @unique
+  name     String
+  answerA  String
+  answerB  String
+  answerC  String
+  answerD  String
+  correct  String
+}
+
+model GabeTestPrismaConnect {
+  id       String @id @map("_id")
+  username String @unique
+  password String
+  score    Int
 }
