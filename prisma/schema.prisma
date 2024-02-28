@@ -21,9 +21,4 @@ model Question {
   correct  String
 }
 
-model GabeTestPrismaConnect {
-  id       String @id @map("_id")
-  username String @unique
-  password String
-  score    Int
-}
+
