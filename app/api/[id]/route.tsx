@@ -73,7 +73,7 @@ async function translateText(
     const response = await fetch(url, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json; charset=utf-8'
       },
       body: JSON.stringify({
         q: text,
@@ -81,6 +81,7 @@ async function translateText(
       })
     });
     const data = await response.json();
+    console.log(data.data.translations[0].translatedText);
     return data.data.translations.map((t: any) => t.translatedText);
   } catch (error) {
     console.error('Translation error:', error);

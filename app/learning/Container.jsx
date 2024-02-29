@@ -1,10 +1,10 @@
 'use client'
 import List from './List';
-import LanguageSelector from './LanguageSelector';
+import LanguageSelector from '../components/LanguageSelector';
 import { Flex, Box, Button, useColorModeValue } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 import { PiArrowBendUpLeft, PiArrowBendDownRight  } from "react-icons/pi";
-import styles from './Container.module.css';
+import styles from '../components/Container.module.css';
 import Link from 'next/link';
 
 import '../App.css';
