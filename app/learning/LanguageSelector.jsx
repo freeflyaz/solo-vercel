@@ -1,16 +1,13 @@
 import { Menu, MenuButton, MenuList, MenuItem, Button } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import 'flag-icon-css/css/flag-icons.min.css';
-
-import { LanguageFlags, OnLanguageChange } from '../typescript';
-
 // Make sure you import the flag-icon-css library in your project entry file
 // import 'flag-icon-css/css/flag-icon.min.css';
 
-const LanguageSelector = ({ onLanguageChange }: OnLanguageChange ) => {
+const LanguageSelector = ({ onLanguageChange }) => {
   // const [selectedLanguage, setSelectedLanguage] = useState('de');
 
-  const languageLabels  = {
+  const languageLabels = {
     ar: 'Arabic',
     fa: 'Persian',
     ps: 'Pashto',
@@ -30,7 +27,7 @@ const LanguageSelector = ({ onLanguageChange }: OnLanguageChange ) => {
   
 
   // Adjust the flag codes as necessary
-  const languageFlags: LanguageFlags = {
+  const languageFlags = {
     ar: 'sy', // Assuming Arabic for Syria
     fa: 'ir', // Persian for Iran
     ps: 'af', // Pashto for Afghanistan, also fa (Dari) is spoken here

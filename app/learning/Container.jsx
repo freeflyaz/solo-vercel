@@ -1,39 +1,21 @@
-import ListQuiz from './ListQuiz';
+'use client'
+import List from './List';
 import LanguageSelector from './LanguageSelector';
-import { Flex, Box, Button, useColorModeValue  } from '@chakra-ui/react';
+import { Flex, Box, Button, useColorModeValue } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 import { PiArrowBendUpLeft, PiArrowBendDownRight  } from "react-icons/pi";
-import  ScoreDisplay  from './ScoreDisplay';
-import Flip from './Flip';
 import styles from './Container.module.css';
-import { EventList, LanguageFlags } from '../typescript';
-
 
 import '../App.css';
 
 
-const Container = () => {
-  const [eventList, setEventList] = useState<EventList>(
-    {
-      name: 'In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil …',
-      correct: 'D',
-      answerA: 'hier Religionsfreiheit gilt.',
-      answerB: 'die Menschen Steuern zahlen.',
-      answerC: 'die Menschen das Wahlrecht haben.',
-      answerD: 'hier Meinungsfreiheit gilt.',
-    }
-  );
+const Container = ({questionNumber}) => {
+  const [eventList, setEventList] = useState([]);
   const [selectedLanguage, setSelectedLanguage] = useState('de');
-  const [currentQuestionId, setCurrentQuestionId] = useState(1); // Starting with question 1
-  const [ready, setReady] = useState(true);
-  const [resetQuizKey, setResetQuizKey] = useState(0); // Step 1
-
-  const [correctCount, setCorrectCount] = useState(0);
-  const [incorrectCount, setIncorrectCount] = useState(0)
-  
+  const [currentQuestionId, setCurrentQuestionId] = useState(questionNumber); // Starting with question 1
 
   // const [isFlipped, setIsFlipped] = useState(false);
-  const [lastSelectedLanguage, setLastSelectedLanguage] = useState(''); // Track the last selected non-German language
+  const [lastSelectedLanguage, setLastSelectedLanguage] = useState(null); // Track the last selected non-German language
   const [selectedFlag, setSelectedFlag] = useState('de');
 
   async function getQuestions() {
@@ -42,24 +24,13 @@ const Container = () => {
     );
     const questions = await response.json();
     setEventList(questions);
-    console.log(questions);
   }
 
   useEffect(() => {
     getQuestions();
-    console.log(selectedLanguage);
-   
   }, [selectedLanguage, currentQuestionId]);
 
-  const handleAnswerSubmission = (isCorrect: boolean) => {
-    if (isCorrect) {
-      setCorrectCount((prev) => prev + 1);
-    } else {
-      setIncorrectCount((prev) => prev + 1);
-    }
-  };
-
-  const handleLanguageChange = (lang: string) => {
+  const handleLanguageChange = (lang) => {
     if (lang !== 'de') {
       setLastSelectedLanguage(lang); // Update the last selected non-German language for flipping
       setSelectedFlag('de');
@@ -69,17 +40,12 @@ const Container = () => {
   };
 
   function nextQuestion() {
-    
     setCurrentQuestionId((prevId) => prevId + 1);
-    setReady(true);
-    setResetQuizKey((prevKey) => prevKey + 1); // Step 3
   }
 
-  // function prevQuestion() {
-  //   setCurrentQuestionId((prevId) => prevId - 1);
-  //   setReady(true);
-  //   setResetQuizKey((prevKey) => prevKey - 1); // Step 3
-  // }
+  function prevQuestion() {
+    setCurrentQuestionId((prevId) => prevId - 1);
+  }
 
   const flip = () => {
     //setIsFlipped(!isFlipped);
@@ -101,7 +67,7 @@ const Container = () => {
     }
   };
 
-  const languageFlags: LanguageFlags = {
+  const languageFlags = {
     ar: 'sy', // Assuming Arabic for Syria
     fa: 'ir', // Persian for Iran
     ps: 'af', // Pashto for Afghanistan, also fa (Dari) is spoken here
@@ -140,37 +106,24 @@ const Container = () => {
       boxShadow="lg"
       mx="auto"
     >
-     { eventList && <ListQuiz key={resetQuizKey} resetQuizKey={resetQuizKey} eventList={eventList} setReady={setReady} handleAnswerSubmission={handleAnswerSubmission}
-      />
-     }
+      <List eventList={eventList} />
       <div className={styles.navBottom}>
-      {/* <Button colorScheme="green" onClick={() => prevQuestion()} isDisabled={ready}>Prev</Button> */}
-      
+      <Button colorScheme="green" onClick={() => prevQuestion()}>Prev</Button>
+      {/* <button className="round-button" >
+  +
+</button> */}
 
 
 
-<button 
-className={`${styles.roundButton} ${selectedLanguage === 'de' && selectedFlag === 'de' ? styles.roundButtonDisabled : ''}`}
- onClick={() => flip()}
- disabled={selectedLanguage === 'de' && selectedFlag === 'de' ? true : false} 
->
+<button className={styles.roundButton} onClick={() => flip()}>
     <PiArrowBendUpLeft className={styles.arrowLeft}/>
     <div className={`flag-icon flag-icon-${languageFlags[selectedLanguage]} ${styles.flagRight}`}></div>
     <div className={`flag-icon flag-icon-${languageFlags[selectedFlag]} ${styles.flagLeft}`}></div>
     <PiArrowBendDownRight className={styles.arrowRight}/>
   </button>
-
-  
-
-
-  <ScoreDisplay correctCount={correctCount} incorrectCount={incorrectCount} />
-  <Button colorScheme="green" onClick={() => nextQuestion()} isDisabled={ready}>Next</Button>
+  <Button colorScheme="green" onClick={() => nextQuestion()}>Next</Button>
       </div>
-
-     
       </Box>
-
-
       
 
       <div className="text-center p-6">
