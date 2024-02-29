@@ -5,13 +5,21 @@ import { Flex, Box, Button, useColorModeValue } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 import { PiArrowBendUpLeft, PiArrowBendDownRight  } from "react-icons/pi";
 import styles from './Container.module.css';
+import Link from 'next/link';
 
 import '../App.css';
 
 
-const Container = ({questionNumber}) => {
+
+
+
+const Container = ({questionNumber,lang}) => {
+  console.log('lang', lang);
+  const firstLanguage = lang ? lang : 'de';
+  console.log('firstLanguage', firstLanguage);
+
   const [eventList, setEventList] = useState([]);
-  const [selectedLanguage, setSelectedLanguage] = useState('de');
+  const [selectedLanguage, setSelectedLanguage] = useState(firstLanguage);
   const [currentQuestionId, setCurrentQuestionId] = useState(questionNumber); // Starting with question 1
 
   // const [isFlipped, setIsFlipped] = useState(false);
@@ -40,7 +48,7 @@ const Container = ({questionNumber}) => {
   };
 
   function nextQuestion() {
-    setCurrentQuestionId((prevId) => prevId + 1);
+    setCurrentQuestionId((prevId) => Number(prevId) + 1);
   }
 
   function prevQuestion() {
@@ -108,6 +116,7 @@ const Container = ({questionNumber}) => {
     >
       <List eventList={eventList} />
       <div className={styles.navBottom}>
+     
       <Button colorScheme="green" onClick={() => prevQuestion()}>Prev</Button>
       {/* <button className="round-button" >
   +
@@ -122,13 +131,22 @@ const Container = ({questionNumber}) => {
     <PiArrowBendDownRight className={styles.arrowRight}/>
   </button>
   <Button colorScheme="green" onClick={() => nextQuestion()}>Next</Button>
+
+
       </div>
       </Box>
       
 
       <div className="text-center p-6">
-        
+      <Link href={`/learning/${Number(currentQuestionId)-1}?lang=${selectedLanguage}`}>
+      &lt;  &nbsp; 
+  </Link>
+
       <span>{currentQuestionId} of 301</span>
+      
+      <Link href={`/learning/${Number(currentQuestionId)+1}?lang=${selectedLanguage}`}>
+      &nbsp; &gt;
+  </Link>
 
         {/* <Button colorScheme="green" onClick={() => flip()}>
           show me in: 
