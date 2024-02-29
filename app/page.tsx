@@ -7,8 +7,8 @@ import ContainerQuiz from "./components/ContainerQuiz";
 export default function Home() {
   return (
     <>
-      <Button colorScheme='green'>Button</Button>
-      {/* <ContainerQuiz /> */}
+      {/* <Button colorScheme='green'>Button</Button> */}
+       <ContainerQuiz /> 
       
     </>
   );
