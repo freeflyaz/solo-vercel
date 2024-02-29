@@ -127,7 +127,7 @@ const Container = () => {
       boxShadow="lg"
       mx="auto"
     >
-      <ListQuiz key={resetQuizKey} eventList={eventList} setReady={setReady} handleAnswerSubmission={handleAnswerSubmission} />
+      <ListQuiz key={resetQuizKey} resetQuizKey={resetQuizKey}  eventList={eventList} setReady={setReady} handleAnswerSubmission={handleAnswerSubmission} />
       <div className={styles.navBottom}>
       {/* <Button colorScheme="green" onClick={() => prevQuestion()} isDisabled={ready}>Prev</Button> */}
       
