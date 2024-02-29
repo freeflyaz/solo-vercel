@@ -1,5 +1,7 @@
 import { Menu, MenuButton, MenuList, MenuItem, Button } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
+import 'flag-icon-css/css/flag-icons.min.css';
+
 // Make sure you import the flag-icon-css library in your project entry file
 // import 'flag-icon-css/css/flag-icon.min.css';
 

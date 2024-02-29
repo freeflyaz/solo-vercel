@@ -3,6 +3,13 @@ import { fonts } from './fonts'
 import { Providers } from './providers'
 import "./globals.css";
 
+import { Metadata } from 'next'
+ 
+export const metadata: Metadata = {
+  title: 'Home',
+  description: 'Welcome to Next.js',
+}
+
 export default function RootLayout({
   children,
 }: {
