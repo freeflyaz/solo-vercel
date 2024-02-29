@@ -1,7 +1,8 @@
 import { Button } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
+import { QuizModeProps } from '../typescript';
 
-const QuizMode = ({ eventList, setReady, handleAnswerSubmission }) => {
+const QuizMode: React.FC<QuizModeProps> = ({ eventList, setReady, handleAnswerSubmission }) => {
   // State to manage the styles of each button individually
   const [buttonAStyle, setButtonAStyle] = useState('basic');
   const [buttonBStyle, setButtonBStyle] = useState('basic');
@@ -25,7 +26,7 @@ const QuizMode = ({ eventList, setReady, handleAnswerSubmission }) => {
 
 
 
-  function checkAnswerHandler(selectedId) {
+  function checkAnswerHandler(selectedId: string) {
     setReady(false);
     setAreButtonsDisabled(true); 
     // Determine the style for each button based on the selected answer

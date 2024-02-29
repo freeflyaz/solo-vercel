@@ -5,12 +5,13 @@ import { useState, useEffect } from 'react';
 import { PiArrowBendUpLeft, PiArrowBendDownRight  } from "react-icons/pi";
 import  ScoreDisplay  from './ScoreDisplay';
 import styles from './Container.module.css';
+import { EventList, LanguageFlags } from '../typescript';
 
 import '../App.css';
 
 
 const Container = () => {
-  const [eventList, setEventList] = useState([]);
+  const [eventList, setEventList] = useState<EventList>();
   const [selectedLanguage, setSelectedLanguage] = useState('de');
   const [currentQuestionId, setCurrentQuestionId] = useState(1); // Starting with question 1
   const [ready, setReady] = useState(true);
@@ -30,6 +31,7 @@ const Container = () => {
     );
     const questions = await response.json();
     setEventList(questions);
+    console.log(questions);
   }
 
   useEffect(() => {
@@ -88,7 +90,7 @@ const Container = () => {
     }
   };
 
-  const languageFlags: { [key: string]: string; } = {
+  const languageFlags: LanguageFlags = {
     ar: 'sy', // Assuming Arabic for Syria
     fa: 'ir', // Persian for Iran
     ps: 'af', // Pashto for Afghanistan, also fa (Dari) is spoken here
@@ -127,7 +129,9 @@ const Container = () => {
       boxShadow="lg"
       mx="auto"
     >
-      <ListQuiz key={resetQuizKey} resetQuizKey={resetQuizKey}  eventList={eventList} setReady={setReady} handleAnswerSubmission={handleAnswerSubmission} />
+     { eventList && <ListQuiz key={resetQuizKey} resetQuizKey={resetQuizKey} eventList={eventList} setReady={setReady} handleAnswerSubmission={handleAnswerSubmission}
+      />
+     }
       <div className={styles.navBottom}>
       {/* <Button colorScheme="green" onClick={() => prevQuestion()} isDisabled={ready}>Prev</Button> */}
       
