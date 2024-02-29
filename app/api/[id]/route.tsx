@@ -1,3 +1,4 @@
+// type definitions not pretty
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/prisma/client';
 

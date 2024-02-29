@@ -4,8 +4,10 @@ import { Flex, Box, Button, useColorModeValue  } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 import { PiArrowBendUpLeft, PiArrowBendDownRight  } from "react-icons/pi";
 import  ScoreDisplay  from './ScoreDisplay';
+import Flip from './Flip';
 import styles from './Container.module.css';
 import { EventList, LanguageFlags } from '../typescript';
+
 
 import '../App.css';
 
@@ -148,6 +150,10 @@ className={`${styles.roundButton} ${selectedLanguage === 'de' && selectedFlag ==
     <div className={`flag-icon flag-icon-${languageFlags[selectedFlag]} ${styles.flagLeft}`}></div>
     <PiArrowBendDownRight className={styles.arrowRight}/>
   </button>
+
+  
+
+
   <ScoreDisplay correctCount={correctCount} incorrectCount={incorrectCount} />
   <Button colorScheme="green" onClick={() => nextQuestion()} isDisabled={ready}>Next</Button>
       </div>
