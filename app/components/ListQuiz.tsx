@@ -4,7 +4,7 @@ interface ListProps {
   resetQuizKey: number; // Assuming resetQuizKey is a string <> wrong!!! 
   eventList: any[]; // Replace any[] with a more specific type if possible
   setReady: (ready: boolean) => void; // Assuming setReady is a function that takes a boolean
-  handleAnswerSubmission: (event: boolean) => void; // Adjust the event type as needed
+  handleAnswerSubmission: (isCorrect: boolean) => void;
 }
 
 const List: React.FC<ListProps> = ({ resetQuizKey, eventList, setReady, handleAnswerSubmission }) => {
