@@ -21,7 +21,7 @@ const Container = () => {
   
 
   // const [isFlipped, setIsFlipped] = useState(false);
-  const [lastSelectedLanguage, setLastSelectedLanguage] = useState(null); // Track the last selected non-German language
+  const [lastSelectedLanguage, setLastSelectedLanguage] = useState(''); // Track the last selected non-German language
   const [selectedFlag, setSelectedFlag] = useState('de');
 
   async function getQuestions() {
@@ -38,16 +38,15 @@ const Container = () => {
    
   }, [selectedLanguage, currentQuestionId]);
 
-  const handleAnswerSubmission = (isCorrect) => {
+  const handleAnswerSubmission = (isCorrect: boolean) => {
     if (isCorrect) {
       setCorrectCount((prev) => prev + 1);
     } else {
       setIncorrectCount((prev) => prev + 1);
     }
-    // Rest of the submission logic
   };
 
-  const handleLanguageChange = (lang) => {
+  const handleLanguageChange = (lang: string) => {
     if (lang !== 'de') {
       setLastSelectedLanguage(lang); // Update the last selected non-German language for flipping
       setSelectedFlag('de');
@@ -89,7 +88,7 @@ const Container = () => {
     }
   };
 
-  const languageFlags = {
+  const languageFlags: { [key: string]: string; } = {
     ar: 'sy', // Assuming Arabic for Syria
     fa: 'ir', // Persian for Iran
     ps: 'af', // Pashto for Afghanistan, also fa (Dari) is spoken here
