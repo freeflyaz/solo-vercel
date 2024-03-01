@@ -13,16 +13,16 @@ const Learning = ({ eventList }) => {
     <>
 
       {eventList.name}
-      <button className={answerButtonStyle('answerA')}>
+      <button className={answerButtonStyle('answerA')} disabled='true'>
         {eventList.answerA}
       </button>
-      <button className={answerButtonStyle('answerB')}>
+      <button className={answerButtonStyle('answerB')} disabled='true'>
         {eventList.answerB}
       </button>
-      <button className={answerButtonStyle('answerC')}>
+      <button className={answerButtonStyle('answerC')} disabled='true'>
         {eventList.answerC}
       </button>
-      <button className={answerButtonStyle('answerD')}>
+      <button className={answerButtonStyle('answerD')} disabled='true'>
         {eventList.answerD}
       </button>
       </> 

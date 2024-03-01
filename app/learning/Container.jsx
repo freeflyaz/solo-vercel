@@ -124,7 +124,11 @@ const Container = ({questionNumber,lang}) => {
 
 
 
-<button className={styles.roundButton} onClick={() => flip()}>
+<button 
+className={`${styles.roundButton} ${selectedLanguage === 'de' && selectedFlag === 'de' ? styles.roundButtonDisabled : ''}`}
+ onClick={() => flip()}
+ disabled={selectedLanguage === 'de' && selectedFlag === 'de' ? true : false} 
+>
     <PiArrowBendUpLeft className={styles.arrowLeft}/>
     <div className={`flag-icon flag-icon-${languageFlags[selectedLanguage]} ${styles.flagRight}`}></div>
     <div className={`flag-icon flag-icon-${languageFlags[selectedFlag]} ${styles.flagLeft}`}></div>
