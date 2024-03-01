@@ -1,6 +1,8 @@
 import QuestionContainer from '../QuestionConatiner';
 import LanguageSelector from '../../components/LanguageSelector';
 import { Flex, Box, Stack } from '@chakra-ui/react';
+import SwitchLang from '../SwitchLang';
+
 import styles from '../Container.module.css';
 
 import Link from 'next/link';
@@ -86,11 +88,19 @@ export default async function Page({ params, searchParams }: Props) {
   let next = parseInt(data.order) + 1;
   let prev = parseInt(data.order) - 1;
 
+  let selectedLanguage = 'en';
+  let selectedFlag = 'us';
+  let languageFlags = 'de'
+
+
   const answerButtonStyle = (answerKey) => {
     return answerKey === data.correct
       ? 'mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full text-left'
       : 'mt-4 bg-gray-100 hover:bg-gray-200 text-black font-bold py-2 px-4 rounded w-full text-left';
   };
+
+
+  const flip = () => {};
 
   return (
     <>
@@ -138,6 +148,9 @@ export default async function Page({ params, searchParams }: Props) {
             >
               Prev
             </Link>
+
+            <SwitchLang  selectedLanguage={selectedLanguage} selectedFlag={selectedFlag} languageFlags={languageFlags} />
+
 
             <Link
               href={`${next}?lang=de`}
