@@ -1,3 +1,4 @@
+'use client';
 import { Menu, MenuButton, MenuList, MenuItem, Button } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import 'flag-icon-css/css/flag-icons.min.css';

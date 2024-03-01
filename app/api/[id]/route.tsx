@@ -12,6 +12,7 @@ export async function GET(
   { params }: { params: { id: number } }
 ) {
   try {
+    console.log('passed to api' + params.id + ' - ' + request.nextUrl.searchParams.get('lang'));
     const question = await prisma.question.findUnique({
       where: { order: Number(params.id) }
     });
