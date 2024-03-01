@@ -11,11 +11,26 @@ export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
+  let data; //
+
+  // fetch data
+  try {
+    const response = await fetch(`http://localhost:3000/api/${params.question}?lang=${searchParams.lang}`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    data = await response.json();
+    console.log('title', data.name);
+  } catch (error) {
+    console.error("Failed to fetch product:", error);
+    // Handle the error according to your application's needs
+    // For example, you might want to return a default metadata object or rethrow the error
+  }
   // Example metadata generation logic
-  const metadata: Metadata = {
-    title: params.question + ' - My Site' + ' ' + searchParams.lang,
+  const metadata: Metadata =  {
+    title: data.order + ' - ' + data.name ,
     // Assuming you would fetch and populate this data correctly
-    description: ''
+    description: data.order + ' - ' + data.name
   };
 
   return metadata;
