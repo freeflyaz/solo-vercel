@@ -8,7 +8,12 @@ import { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Home',
   description: 'Welcome to Next.js',
+  verification: {
+    google: "ZvLMEPPGmHtSCxGLhPkpWoL4Gc7yVyg6pKwr35crXWM",
+  },
 }
+
+{/* <meta name="google-site-verification" content="ZvLMEPPGmHtSCxGLhPkpWoL4Gc7yVyg6pKwr35crXWM" /> */}
 
 export default function RootLayout({
   children,
