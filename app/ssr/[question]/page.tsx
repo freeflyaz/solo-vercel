@@ -1,4 +1,5 @@
 import QuestionContainer from '../QuestionConatiner';
+//import LanguageSelector from '../LanguageSelector';
 import LanguageSelector from '../../components/LanguageSelector';
 import { Flex, Box, Stack } from '@chakra-ui/react';
 import SwitchLang from '../SwitchLang';
@@ -91,6 +92,8 @@ export default async function Page({ params, searchParams }: Props) {
   let selectedLanguage = 'en';
   let selectedFlag = 'us';
   let languageFlags = 'de'
+  
+ 
 
 
   const answerButtonStyle = (answerKey) => {
@@ -110,7 +113,7 @@ export default async function Page({ params, searchParams }: Props) {
             <span
               className={`flag-icon flag-icon-${languageFlags['de']} mr-2`}
             ></span>
-            <LanguageSelector />
+            <LanguageSelector  />
           </Box>
         </Flex>
         <Box
