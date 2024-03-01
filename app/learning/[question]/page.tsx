@@ -1,32 +1,39 @@
-'use client';
-// pages/[question].js
-import Container from '../Container'
-import { useSearchParams } from 'next/navigation'
+// 'use client';
+import Container from '../Container';
+import { useSearchParams } from 'next/navigation';
 
-import { type NextRequest } from 'next/server'
+import { Metadata } from 'next';
 
-// interface QuestionPageProps {
-//   question: string;
-//   lang?: string; // lang is optional because it may not be provided in the URL
-// }
- 
-// export function GET(request: NextRequest) {
-//   const searchParams = request.nextUrl.searchParams
-//   const query = searchParams.get('lang')
-//   // query is "hello" for /api/search?query=hello
-//   console.log('query', query);
-// }
+export const metadata: Metadata = {
+  title: 'Home',
+  description: 'Welcome to Next.js'
+};
 
-export default function QuestionPage({ params }: { params: string }) {
-  const searchParams = useSearchParams();
-  const lang = searchParams.get('lang');
-  
+export default function Page({
+  params,
+  searchParams
+}: {
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
   return (
-    <div>
-      <h1>{params.question}</h1>
-      <Container questionNumber={params.question} lang={lang} />
-      {/* Render additional content based on the question */}
-    </div>
+  <>
+    <h1>Param: {params.question}</h1>
+    <h1>query: {searchParams.lang}</h1>
+    <Container questionNumber={params.question} lang={searchParams.lang} />
+  </>
   );
 }
 
+// export default function QuestionPage({ params }: { params: string }) {
+//   const searchParams = useSearchParams();
+//   const lang = searchParams.get('lang');
+
+//   return (
+//     <div>
+//       <h1>{params.question}</h1>
+//       <Container questionNumber={params.question} lang={lang} />
+//       {/* Render additional content based on the question */}
+//     </div>
+//   );
+// }
