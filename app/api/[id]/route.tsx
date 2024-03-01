@@ -56,7 +56,7 @@ export async function GET(
   } catch (error) {
     console.error(error);
     return NextResponse.json(
-      { error: 'internal server error' },
+      { error: error.message || 'An error occurred while processing your request.'},
       { status: 500 }
     );
   }
