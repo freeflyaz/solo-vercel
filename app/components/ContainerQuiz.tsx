@@ -36,9 +36,10 @@ const Container = () => {
   const [selectedFlag, setSelectedFlag] = useState('de');
 
   async function getQuestions() {
-    const response = await fetch(
-      `http://localhost:3000/api/${currentQuestionId}?lang=${selectedLanguage}`
-    );
+    const baseUrl = process.env.NODE_ENV === 'production'
+    ? 'https://solo-vercel-prisma-generate.vercel.app' // Use your production base URL here
+    : 'http://localhost:3000';   
+    const response = await fetch(`${baseUrl}/api/${currentQuestionId}?lang=${selectedLanguage}`);
     const questions = await response.json();
     setEventList(questions);
     console.log(questions);

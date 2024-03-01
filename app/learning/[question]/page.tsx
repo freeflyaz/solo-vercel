@@ -12,10 +12,11 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   let data; //
-
+ const api_url = process.env.API_URL;
   // fetch data
   try {
-    const response = await fetch(`http://localhost:3000/api/${params.question}?lang=${searchParams.lang}`);
+     const response = await fetch(`${api_url}/api/${params.question}?lang=${searchParams.lang}`);
+    // const response = await fetch(`http://localhost:3000/api/${params.question}?lang=${searchParams.lang}`);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
