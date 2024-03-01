@@ -4,7 +4,6 @@ import { Flex, Box, Button, useColorModeValue  } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 import { PiArrowBendUpLeft, PiArrowBendDownRight  } from "react-icons/pi";
 import  ScoreDisplay  from './ScoreDisplay';
-import Flip from './Flip';
 import styles from './Container.module.css';
 import { EventList, LanguageFlags } from '../typescript';
 
