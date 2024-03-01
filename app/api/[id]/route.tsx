@@ -53,10 +53,10 @@ export async function GET(
       );
 
     return NextResponse.json(question);
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
     return NextResponse.json(
-      { error: error.message || 'An error occurred while processing your request.'},
+      { error: error.message  || 'An error occurred while processing your request.'},
       { status: 500 }
     );
   }
