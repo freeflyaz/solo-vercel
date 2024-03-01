@@ -58,11 +58,7 @@ async function getData(
   }
 }
 
-const answerButtonStyle = (answerKey) => {
-  return answerKey === 'answerA'
-    ? 'mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full text-left'
-    : 'mt-4 bg-gray-100 hover:bg-gray-200 text-black font-bold py-2 px-4 rounded w-full text-left';
-};
+
 
 const languageFlags = {
   ar: 'sy', // Assuming Arabic for Syria
@@ -90,6 +86,12 @@ export default async function Page({ params, searchParams }: Props) {
   let next = parseInt(data.order) + 1;
   let prev = parseInt(data.order) - 1;
 
+  const answerButtonStyle = (answerKey) => {
+    return answerKey === data.correct
+      ? 'mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full text-left'
+      : 'mt-4 bg-gray-100 hover:bg-gray-200 text-black font-bold py-2 px-4 rounded w-full text-left';
+  };
+
   return (
     <>
       <div className={styles.Container}>
@@ -115,17 +117,17 @@ export default async function Page({ params, searchParams }: Props) {
           minH="450px" // Set minimum height to 200px
         >
           {data.name}
-          <Stack spacing={4} direction="column" mt={4}>
-      <button className={answerButtonStyle('answerA')} disabled>
+          <Stack spacing={0} direction="column" mt={0}>
+      <button className={answerButtonStyle('A')} disabled>
         {data.answerA}
       </button>
-      <button className={answerButtonStyle('answerB')} disabled>
+      <button className={answerButtonStyle('B')} disabled>
         {data.answerB}
       </button>
-      <button className={answerButtonStyle('answerC')} disabled>
+      <button className={answerButtonStyle('C')} disabled>
         {data.answerC}
       </button>
-      <button className={answerButtonStyle('answerD')} disabled>
+      <button className={answerButtonStyle('D')} disabled>
         {data.answerD}
       </button>
     </Stack>
