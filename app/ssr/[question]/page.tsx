@@ -44,23 +44,23 @@ import Link from 'next/link';
 //   return metadata;
 // }
 
-const cleanParams = (params) => {
+const cleanParamsMakeIntoNumber = (obj) => {
   // Check if the target property exists and is a string
-
+console.log('pages: cleanParams: obj: ', obj);
   // Use the split operation on the 'id' property
-  const newId = params.question.split('-', 1)[0];
   // Return a new object with the modified 'id' and the rest of the original properties
-  return { ...params, question: Number(newId) };
+  const questionStr = obj.params.question;
+  const res = questionStr.split('-', 1)[0];
+  console.log('pages: cleanParams: res: ', res);
+  return res;
 };
 
-async function getData(
-  params: { id: string; question?: string | undefined }, //wrong tupe for id should be question
-  searchParams: { [key: string]: string | string[] | undefined }
-) {
+async function getData(questionNumber: Number, lang: string)
+ {
+  const api_url = process.env.API_URL;
+  const buildUrl = `${api_url}/api/${questionNumber}?lang=${lang}`;
+  console.log('pages getData(): passed to api string', buildUrl);
   try {
-    const api_url = process.env.API_URL;
-    const buildUrl = `${api_url}/api/${params.question}?lang=${searchParams.lang}`;
-    console.log('pages getData(): passed to api string', buildUrl);
     const response = await fetch(buildUrl);
     // const response = await fetch(`http://localhost:3000/api/${params.question}?lang=${searchParams.lang}`);
     if (!response.ok) {
@@ -91,19 +91,33 @@ const languageFlags = {
   // Kosovo uses 'xk', a user-assigned code not officially ISO 3166-1
 };
 
-export default async function Page({ params, searchParams }: Props) {
-  console.log('pages: Page(): ', params, searchParams);
-  const newObject = cleanParams(params);
-  console.log('pages: Page(): newObject', newObject);
-  const data = await getData(newObject, searchParams);
-  console.log('pages: Page(): data', data);
-  let next = parseInt(data.order) + 1;
-  let prev = parseInt(data.order) - 1;
+export default async function Page(props: any){
+
+
+  // export default async function Page(params: { question?: string }, 
+  //   searchParams: { [key: string]: string | string[] | undefined }
+  // ){
+  
+  
+  console.log('pages here1: Page(): ', props);
+  const onlyNumberNoText = cleanParamsMakeIntoNumber(props);
+  console.log('pages: Page(): onlyNumberNoText', onlyNumberNoText);
+  const searchParams = props.searchParams.lang;
+  const data = await getData(onlyNumberNoText, searchParams);
+  
+  
+  // console.log('pages: Page(): data', data);
+  
+  
+  // let next = parseInt(data.order) + 1;
+  // let prev = parseInt(data.order) - 1;
 
   let selectedLanguage = 'en';
   let selectedFlag = 'us';
   let languageFlags = 'de';
 
+  // const dataPlusOne = getData
+  
   const answerButtonStyle = (answerKey) => {
     return answerKey === data.correct
       ? 'mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full text-left'
@@ -144,7 +158,7 @@ export default async function Page({ params, searchParams }: Props) {
           mx="auto"
           minH="450px" // Set minimum height to 200px
         >
-          {data.name}
+          {/* {data.name}
           <Stack spacing={0} direction="column" mt={0}>
             <button className={answerButtonStyle('A')} disabled>
               {data.answerA}
@@ -156,16 +170,16 @@ export default async function Page({ params, searchParams }: Props) {
               {data.answerC}
             </button>
             <button className={answerButtonStyle('D')} disabled>
-              {data.answerD}
-            </button>
-          </Stack>
+              {data.answerD} */}
+            {/* </button> */}
+          {/* </Stack> */}
           <div className={styles.navBottom}>
-            <Link
+            {/* <Link
               href={`${prev}?lang=de`}
               className="px-4 py-2 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 shadow-lg transition duration-150 ease-in-out"
             >
               Prev
-            </Link>
+            </Link> */}
 
             <SwitchLang
               selectedLanguage={selectedLanguage}
@@ -173,12 +187,12 @@ export default async function Page({ params, searchParams }: Props) {
               languageFlags={languageFlags}
             />
 
-            <Link
-              href={`${next}-${cleanUrl(data.name)}?lang=de`}
+            {/* <Link
+              // href={`${next}-${cleanUrl(dataPlusOne.name)}?lang=de`}
               className="px-4 py-2 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 shadow-lg transition duration-150 ease-in-out"
             >
               Next
-            </Link>
+            </Link> */}
           </div>
         </Box>
       </div>

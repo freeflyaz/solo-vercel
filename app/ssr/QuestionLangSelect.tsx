@@ -3,6 +3,7 @@ import { Menu, MenuButton, MenuList, MenuItem, Button } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import 'flag-icon-css/css/flag-icons.min.css';
 import { useRouter } from 'next/navigation';
+import { cleanUrl } from './util';
 
  
 
@@ -53,13 +54,7 @@ const LanguageSelector = () => {
     // Kosovo uses 'xk', a user-assigned code not officially ISO 3166-1
   };
 
-  function cleanUrl(url) { // gabe - this is a duplicate of the function in the page.tsx file
-    let trimmedString = url.trim();
-    let formattedString = trimmedString.replace(/[^\p{L}\p{N}]/gu, '-');
-    // \p{L} matches any kind of letter from any language.
-    // \p{N} matches any kind of numeric digit in any script.
-    return formattedString;
-  }
+ 
 
 
   async function getData(questionNumber, lang: string) {
@@ -68,7 +63,7 @@ const LanguageSelector = () => {
     try {
 
       // const buildUrl = `${api_url}/api/${questionNumber}?lang=${lang}`;
-      const buildUrl = `http://localhost:3000/api/${questionNumber}?lang=${lang}`;  //gabe
+      //const buildUrl = `http://localhost:3000/api/${questionNumber}?lang=${lang}`;  //gabe
       console.log('QuestionLangSelect: passed to api string', buildUrl);
       const response = await fetch(buildUrl);
       // const response = await fetch(`http://localhost:3000/api/${params.question}?lang=${searchParams.lang}`);
