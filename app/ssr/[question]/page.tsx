@@ -59,14 +59,20 @@ export default async function Page(props: any) {
   let next = parseInt(data.order) + 1;
   let prev = parseInt(data.order) - 1;
 
-  let selectedLanguage = 'en';
-  let selectedFlag = 'us';
+  let selectedLanguage = searchParams;
+  let selectedFlag = languageFlags[searchParams];
 
   const answerButtonStyle = (answerKey) => {
     return answerKey === data.correct
       ? 'mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full text-left'
       : 'mt-4 bg-gray-100 hover:bg-gray-200 text-black font-bold py-2 px-4 rounded w-full text-left';
   };
+
+  //console.log(next, searchParams);
+  const nextQuestion = await getData((next), searchParams);
+  const cleanNextUrl = cleanUrl(nextQuestion.name);
+  //console.log('nextQuestion', nextQuestion.name);
+
 
   const flip = () => {};
   return (
@@ -80,7 +86,7 @@ export default async function Page(props: any) {
         <Box
           display="flex"
           flexDirection="column"
-          justifyContent="space-between" // This pushes the navBottom to the bottom
+          justifyContent="space-between" 
           bg="white"
           p={8}
           maxW="md"
@@ -88,7 +94,7 @@ export default async function Page(props: any) {
           borderRadius={8}
           boxShadow="lg"
           mx="auto"
-          minH="450px" // Set minimum height to 200px
+          minH="450px" 
         >
           {data.name}
           <Stack spacing={0} direction="column" mt={0}>
@@ -119,7 +125,7 @@ export default async function Page(props: any) {
             />
 
             <Link
-              href={`${next}-${cleanUrl('1-hdhdhdd')}?lang=de`}
+              href={`${next}-${cleanNextUrl}?lang=de`}
               className="px-4 py-2 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 shadow-lg transition duration-150 ease-in-out"
             >
               Next

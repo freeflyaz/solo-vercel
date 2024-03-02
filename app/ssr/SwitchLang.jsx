@@ -21,7 +21,7 @@ function SwitchLang({ selectedLanguage, selectedFlag, languageFlags }) {
     >
       <PiArrowBendUpLeft className={styles.arrowLeft} />
       <div
-        className={`flag-icon flag-icon-${languageFlags} ${styles.flagRight}`}
+        className={`flag-icon flag-icon-${'de'} ${styles.flagRight}`}
       ></div>
       <div
         className={`flag-icon flag-icon-${selectedFlag} ${styles.flagLeft}`}
