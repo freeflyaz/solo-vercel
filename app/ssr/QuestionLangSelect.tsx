@@ -10,7 +10,7 @@ import { LanguageFlags, OnLanguageChange } from '../typescript';
 // import 'flag-icon-css/css/flag-icon.min.css';
 
 const LanguageSelector = () => {
-  const router = useRouter()
+  const router = useRouter();
   // const [selectedLanguage, setSelectedLanguage] = useState('de');
 
   const languageLabels = {
@@ -51,7 +51,7 @@ const LanguageSelector = () => {
     // Kosovo uses 'xk', a user-assigned code not officially ISO 3166-1
   };
 
-  async function getData(questionNumber, lang : string) {
+  async function getData(questionNumber, lang: string) {
     try {
       const api_url = process.env.API_URL;
       const buildUrl = `${api_url}/api/${questionNumber}?lang=${lang}`;
@@ -67,9 +67,9 @@ const LanguageSelector = () => {
     }
   }
 
-  const  handleLanguageChange = async (lang) => {
+  const handleLanguageChange = async (lang) => {
     console.log('questionLangSelect: handleLanguageChange(): lang', lang);
-    const data = await getData(1,'en');
+    const data = await getData(1, 'en');
     router.push(`1-${data.name}?lang=${lang}`);
     // alert(`Language changed to ${lang}`);
   };
