@@ -52,7 +52,7 @@ const LanguageSelector = () => {
   };
 
   const handleLanguageChange = (lang) => {
-    router.push('/ssr/24?lang=en');
+    router.push(`?lang=${lang}`);
     // alert(`Language changed to ${lang}`);
   };
 
