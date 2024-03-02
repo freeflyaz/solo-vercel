@@ -1,7 +1,9 @@
 'use client';
 import React from 'react'
 import { PiArrowBendUpLeft, PiArrowBendDownRight  } from "react-icons/pi";
-import styles from './Container.module.css';
+import styles from './SwitchLang.module.css';
+import 'flag-icon-css/css/flag-icons.min.css';
+
 
 function SwitchLang({selectedLanguage, selectedFlag, languageFlags}) {
 

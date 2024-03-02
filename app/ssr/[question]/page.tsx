@@ -1,10 +1,10 @@
 import QuestionContainer from '../QuestionConatiner';
-//import LanguageSelector from '../LanguageSelector';
-import LanguageSelector from '../../components/LanguageSelector';
+import LanguageSelector from '../QuestionLangSelect';
+//import LanguageSelector from '../../components/LanguageSelector';
 import { Flex, Box, Stack } from '@chakra-ui/react';
 import SwitchLang from '../SwitchLang';
 
-import styles from '../Container.module.css';
+import styles from '../QuestionContainer.module.css';
 
 import Link from 'next/link';
 // import { Metadata, ResolvingMetadata } from 'next';

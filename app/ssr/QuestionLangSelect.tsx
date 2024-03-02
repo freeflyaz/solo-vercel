@@ -2,16 +2,18 @@
 import { Menu, MenuButton, MenuList, MenuItem, Button } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import 'flag-icon-css/css/flag-icons.min.css';
+import { useRouter } from 'next/navigation';
 
 import { LanguageFlags, OnLanguageChange } from '../typescript';
 
 // Make sure you import the flag-icon-css library in your project entry file
 // import 'flag-icon-css/css/flag-icon.min.css';
 
-const LanguageSelector = ({ onLanguageChange }: OnLanguageChange ) => {
+const LanguageSelector = () => {
+  const router = useRouter()
   // const [selectedLanguage, setSelectedLanguage] = useState('de');
 
-  const languageLabels  = {
+  const languageLabels = {
     ar: 'Arabic',
     fa: 'Persian',
     ps: 'Pashto',
@@ -25,10 +27,9 @@ const LanguageSelector = ({ onLanguageChange }: OnLanguageChange ) => {
     ru: 'Russian',
     sq: 'Albanian',
     uk: 'Ukrainian',
-    sr: 'Serbian',
+    sr: 'Serbian'
     // Add more languages here if needed
   };
-  
 
   // Adjust the flag codes as necessary
   const languageFlags: LanguageFlags = {
@@ -49,12 +50,11 @@ const LanguageSelector = ({ onLanguageChange }: OnLanguageChange ) => {
     de: 'de'
     // Kosovo uses 'xk', a user-assigned code not officially ISO 3166-1
   };
-  
-  
 
-  // const handleLanguageChange = (lang) => {
-  //   onLanguageChange(lang); // Notify parent component
-  // };
+  const handleLanguageChange = (lang) => {
+    router.push('/ssr/24?lang=en');
+    // alert(`Language changed to ${lang}`);
+  };
 
   return (
     <Menu>
@@ -65,8 +65,13 @@ const LanguageSelector = ({ onLanguageChange }: OnLanguageChange ) => {
       </MenuButton>
       <MenuList>
         {Object.entries(languageLabels).map(([langCode, label]) => (
-          <MenuItem key={langCode} onClick={() => onLanguageChange(langCode)}>
-            <span className={`flag-icon flag-icon-${languageFlags[langCode]} mr-2`}></span>
+          <MenuItem
+            key={langCode}
+            onClick={() => handleLanguageChange(langCode)}
+          >
+            <span
+              className={`flag-icon flag-icon-${languageFlags[langCode]} mr-2`}
+            ></span>
             {label}
           </MenuItem>
         ))}
