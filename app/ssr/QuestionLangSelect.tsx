@@ -51,8 +51,26 @@ const LanguageSelector = () => {
     // Kosovo uses 'xk', a user-assigned code not officially ISO 3166-1
   };
 
-  const handleLanguageChange = (lang) => {
-    router.push(`?lang=${lang}`);
+  async function getData(questionNumber, lang : string) {
+    try {
+      const api_url = process.env.API_URL;
+      const buildUrl = `${api_url}/api/${questionNumber}?lang=${lang}`;
+      console.log('QuestionLangSelect: passed to api string', buildUrl);
+      const response = await fetch(buildUrl);
+      // const response = await fetch(`http://localhost:3000/api/${params.question}?lang=${searchParams.lang}`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return await response.json();
+    } catch (error) {
+      console.error('Failed to fetch product:', error);
+    }
+  }
+
+  const  handleLanguageChange = async (lang) => {
+    console.log('questionLangSelect: handleLanguageChange(): lang', lang);
+    const data = await getData(1,'en');
+    router.push(`1-${data.name}?lang=${lang}`);
     // alert(`Language changed to ${lang}`);
   };
 

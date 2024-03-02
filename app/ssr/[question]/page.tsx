@@ -1,3 +1,5 @@
+'use server'
+
 import QuestionContainer from '../QuestionConatiner';
 import LanguageSelector from '../QuestionLangSelect';
 //import LanguageSelector from '../../components/LanguageSelector';
@@ -61,7 +63,7 @@ async function getData(
   try {
     const api_url = process.env.API_URL;
     const buildUrl = `${api_url}/api/${params.question}?lang=${searchParams.lang}`;
-    console.log('passed to api string', buildUrl);
+    console.log('pages getData(): passed to api string', buildUrl);
     const response = await fetch(buildUrl);
     // const response = await fetch(`http://localhost:3000/api/${params.question}?lang=${searchParams.lang}`);
     if (!response.ok) {
@@ -97,11 +99,11 @@ const languageFlags = {
 export default async function Page({ params, searchParams }: Props) {
   
   
-  console.log(params, searchParams);
+  console.log('pages: Page(): ', params, searchParams);
   const newObject = cleanParams(params);
-console.log('newObject', newObject);
+console.log('pages: Page(): newObject', newObject);
   const data = await getData(newObject, searchParams);
-  console.log('data', data);
+  console.log('pages: Page(): data', data);
   let next = parseInt(data.order) + 1;
   let prev = parseInt(data.order) - 1;
 
