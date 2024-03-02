@@ -4,6 +4,7 @@ import { ChevronDownIcon } from '@chakra-ui/icons';
 import 'flag-icon-css/css/flag-icons.min.css';
 import { useRouter } from 'next/navigation';
 import { cleanUrl } from './util';
+import { getData } from './service';
 
  
 
@@ -57,24 +58,24 @@ const LanguageSelector = () => {
  
 
 
-  async function getData(questionNumber, lang: string) {
-    const api_url = process.env.API_URL;
-    console.log('QuestionLangSelect: api_url', api_url);
-    try {
+  // async function getData(questionNumber, lang: string) {
+  //   const api_url = process.env.API_URL;
+  //   console.log('QuestionLangSelect: api_url', api_url);
+  //   try {
 
-      // const buildUrl = `${api_url}/api/${questionNumber}?lang=${lang}`;
-      //const buildUrl = `http://localhost:3000/api/${questionNumber}?lang=${lang}`;  //gabe
-      console.log('QuestionLangSelect: passed to api string', buildUrl);
-      const response = await fetch(buildUrl);
-      // const response = await fetch(`http://localhost:3000/api/${params.question}?lang=${searchParams.lang}`);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return await response.json();
-    } catch (error) {
-      console.error('Failed to fetch product:', error);
-    }
-  }
+  //     // const buildUrl = `${api_url}/api/${questionNumber}?lang=${lang}`;
+  //     const buildUrl = `http://localhost:3000/api/${questionNumber}?lang=${lang}`;  //gabe
+  //     console.log('QuestionLangSelect: passed to api string', buildUrl);
+  //     const response = await fetch(buildUrl);
+  //     // const response = await fetch(`http://localhost:3000/api/${params.question}?lang=${searchParams.lang}`);
+  //     if (!response.ok) {
+  //       throw new Error(`HTTP error! status: ${response.status}`);
+  //     }
+  //     return await response.json();
+  //   } catch (error) {
+  //     console.error('Failed to fetch product:', error);
+  //   }
+  // }
 
   const handleLanguageChange = async (lang) => {
     console.log('questionLangSelect: handleLanguageChange(): lang', lang);

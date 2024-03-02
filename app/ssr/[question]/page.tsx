@@ -7,6 +7,8 @@ import { Flex, Box, Stack } from '@chakra-ui/react';
 import SwitchLang from '../SwitchLang';
 
 import styles from '../QuestionContainer.module.css';
+import { cleanUrl } from '../util';
+import { getData } from '../service';
 
 import Link from 'next/link';
 // import { Metadata, ResolvingMetadata } from 'next';
@@ -55,22 +57,7 @@ console.log('pages: cleanParams: obj: ', obj);
   return res;
 };
 
-async function getData(questionNumber: Number, lang: string)
- {
-  const api_url = process.env.API_URL;
-  const buildUrl = `${api_url}/api/${questionNumber}?lang=${lang}`;
-  console.log('pages getData(): passed to api string', buildUrl);
-  try {
-    const response = await fetch(buildUrl);
-    // const response = await fetch(`http://localhost:3000/api/${params.question}?lang=${searchParams.lang}`);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    return await response.json();
-  } catch (error) {
-    console.error('Failed to fetch product:', error);
-  }
-}
+
 
 const languageFlags = {
   ar: 'sy', // Assuming Arabic for Syria
@@ -109,8 +96,8 @@ export default async function Page(props: any){
   // console.log('pages: Page(): data', data);
   
   
-  // let next = parseInt(data.order) + 1;
-  // let prev = parseInt(data.order) - 1;
+  let next = parseInt(data.order) + 1;
+  let prev = parseInt(data.order) - 1;
 
   let selectedLanguage = 'en';
   let selectedFlag = 'us';
@@ -126,13 +113,7 @@ export default async function Page(props: any){
 
   const flip = () => {};
 
-  function cleanUrl(url) {
-    let trimmedString = url.trim();
-    let formattedString = trimmedString.replace(/[^\p{L}\p{N}]/gu, '-');
-    // \p{L} matches any kind of letter from any language.
-    // \p{N} matches any kind of numeric digit in any script.
-    return formattedString;
-  }
+
 
   return (
     <>
@@ -158,7 +139,7 @@ export default async function Page(props: any){
           mx="auto"
           minH="450px" // Set minimum height to 200px
         >
-          {/* {data.name}
+          {data.name}
           <Stack spacing={0} direction="column" mt={0}>
             <button className={answerButtonStyle('A')} disabled>
               {data.answerA}
@@ -170,16 +151,16 @@ export default async function Page(props: any){
               {data.answerC}
             </button>
             <button className={answerButtonStyle('D')} disabled>
-              {data.answerD} */}
-            {/* </button> */}
-          {/* </Stack> */}
+              {data.answerD} 
+            </button> 
+          </Stack>
           <div className={styles.navBottom}>
-            {/* <Link
+             <Link
               href={`${prev}?lang=de`}
               className="px-4 py-2 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 shadow-lg transition duration-150 ease-in-out"
             >
               Prev
-            </Link> */}
+            </Link>
 
             <SwitchLang
               selectedLanguage={selectedLanguage}
@@ -187,12 +168,12 @@ export default async function Page(props: any){
               languageFlags={languageFlags}
             />
 
-            {/* <Link
-              // href={`${next}-${cleanUrl(dataPlusOne.name)}?lang=de`}
+             <Link
+               href={`${next}-${cleanUrl('1-hdhdhdd')}?lang=de`}
               className="px-4 py-2 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 shadow-lg transition duration-150 ease-in-out"
             >
               Next
-            </Link> */}
+            </Link>
           </div>
         </Box>
       </div>
