@@ -1,4 +1,4 @@
-'use server'
+'use server';
 
 import QuestionContainer from '../QuestionConatiner';
 import LanguageSelector from '../QuestionLangSelect';
@@ -44,17 +44,14 @@ import Link from 'next/link';
 //   return metadata;
 // }
 
-
 const cleanParams = (params) => {
- // Check if the target property exists and is a string
+  // Check if the target property exists and is a string
 
   // Use the split operation on the 'id' property
   const newId = params.question.split('-', 1)[0];
   // Return a new object with the modified 'id' and the rest of the original properties
   return { ...params, question: Number(newId) };
-}
-
-
+};
 
 async function getData(
   params: { id: string; question?: string | undefined }, //wrong tupe for id should be question
@@ -74,8 +71,6 @@ async function getData(
     console.error('Failed to fetch product:', error);
   }
 }
-
-
 
 const languageFlags = {
   ar: 'sy', // Assuming Arabic for Syria
@@ -97,11 +92,9 @@ const languageFlags = {
 };
 
 export default async function Page({ params, searchParams }: Props) {
-  
-  
   console.log('pages: Page(): ', params, searchParams);
   const newObject = cleanParams(params);
-console.log('pages: Page(): newObject', newObject);
+  console.log('pages: Page(): newObject', newObject);
   const data = await getData(newObject, searchParams);
   console.log('pages: Page(): data', data);
   let next = parseInt(data.order) + 1;
@@ -109,10 +102,7 @@ console.log('pages: Page(): newObject', newObject);
 
   let selectedLanguage = 'en';
   let selectedFlag = 'us';
-  let languageFlags = 'de'
-  
- 
-
+  let languageFlags = 'de';
 
   const answerButtonStyle = (answerKey) => {
     return answerKey === data.correct
@@ -120,18 +110,15 @@ console.log('pages: Page(): newObject', newObject);
       : 'mt-4 bg-gray-100 hover:bg-gray-200 text-black font-bold py-2 px-4 rounded w-full text-left';
   };
 
-
   const flip = () => {};
 
   function cleanUrl(url) {
-  let trimmedString = url.trim();
-  let formattedString = trimmedString.replace(/[^\p{L}\p{N}]/gu, '-');
-  // \p{L} matches any kind of letter from any language.
-  // \p{N} matches any kind of numeric digit in any script.
-  return formattedString;
+    let trimmedString = url.trim();
+    let formattedString = trimmedString.replace(/[^\p{L}\p{N}]/gu, '-');
+    // \p{L} matches any kind of letter from any language.
+    // \p{N} matches any kind of numeric digit in any script.
+    return formattedString;
   }
-
-
 
   return (
     <>
@@ -141,7 +128,7 @@ console.log('pages: Page(): newObject', newObject);
             <span
               className={`flag-icon flag-icon-${languageFlags['de']} mr-2`}
             ></span>
-            <LanguageSelector  />
+            <LanguageSelector />
           </Box>
         </Flex>
         <Box
@@ -159,19 +146,19 @@ console.log('pages: Page(): newObject', newObject);
         >
           {data.name}
           <Stack spacing={0} direction="column" mt={0}>
-      <button className={answerButtonStyle('A')} disabled>
-        {data.answerA}
-      </button>
-      <button className={answerButtonStyle('B')} disabled>
-        {data.answerB}
-      </button>
-      <button className={answerButtonStyle('C')} disabled>
-        {data.answerC}
-      </button>
-      <button className={answerButtonStyle('D')} disabled>
-        {data.answerD}
-      </button>
-    </Stack>
+            <button className={answerButtonStyle('A')} disabled>
+              {data.answerA}
+            </button>
+            <button className={answerButtonStyle('B')} disabled>
+              {data.answerB}
+            </button>
+            <button className={answerButtonStyle('C')} disabled>
+              {data.answerC}
+            </button>
+            <button className={answerButtonStyle('D')} disabled>
+              {data.answerD}
+            </button>
+          </Stack>
           <div className={styles.navBottom}>
             <Link
               href={`${prev}?lang=de`}
@@ -180,8 +167,11 @@ console.log('pages: Page(): newObject', newObject);
               Prev
             </Link>
 
-            <SwitchLang  selectedLanguage={selectedLanguage} selectedFlag={selectedFlag} languageFlags={languageFlags} />
-
+            <SwitchLang
+              selectedLanguage={selectedLanguage}
+              selectedFlag={selectedFlag}
+              languageFlags={languageFlags}
+            />
 
             <Link
               href={`${next}-${cleanUrl(data.name)}?lang=de`}
