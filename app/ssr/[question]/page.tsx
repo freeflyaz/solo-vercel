@@ -42,8 +42,20 @@ import Link from 'next/link';
 //   return metadata;
 // }
 
+
+const cleanParams = (params) => {
+ // Check if the target property exists and is a string
+
+  // Use the split operation on the 'id' property
+  const newId = params.question.split('-', 1)[0];
+  // Return a new object with the modified 'id' and the rest of the original properties
+  return { ...params, question: Number(newId) };
+}
+
+
+
 async function getData(
-  params: { id: string; question?: string | undefined },
+  params: { id: string; question?: string | undefined }, //wrong tupe for id should be question
   searchParams: { [key: string]: string | string[] | undefined }
 ) {
   try {
@@ -83,8 +95,12 @@ const languageFlags = {
 };
 
 export default async function Page({ params, searchParams }: Props) {
+  
+  
   console.log(params, searchParams);
-  const data = await getData(params, searchParams);
+  const newObject = cleanParams(params);
+console.log('newObject', newObject);
+  const data = await getData(newObject, searchParams);
   console.log('data', data);
   let next = parseInt(data.order) + 1;
   let prev = parseInt(data.order) - 1;
@@ -104,6 +120,16 @@ export default async function Page({ params, searchParams }: Props) {
 
 
   const flip = () => {};
+
+  function cleanUrl(url) {
+  let trimmedString = url.trim();
+  let formattedString = trimmedString.replace(/[^\p{L}\p{N}]/gu, '-');
+  // \p{L} matches any kind of letter from any language.
+  // \p{N} matches any kind of numeric digit in any script.
+  return formattedString;
+  }
+
+
 
   return (
     <>
@@ -156,7 +182,7 @@ export default async function Page({ params, searchParams }: Props) {
 
 
             <Link
-              href={`${next}?lang=de`}
+              href={`${next}-${cleanUrl(data.name)}?lang=de`}
               className="px-4 py-2 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 shadow-lg transition duration-150 ease-in-out"
             >
               Next
