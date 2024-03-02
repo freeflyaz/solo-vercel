@@ -3,92 +3,24 @@ import { Menu, MenuButton, MenuList, MenuItem, Button } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import 'flag-icon-css/css/flag-icons.min.css';
 import { useRouter } from 'next/navigation';
-import { cleanUrl } from './util';
+import { cleanUrl, languageLabels, languageFlags } from './util';
 import { getData } from './service';
 
- 
-
-import { LanguageFlags, OnLanguageChange } from '../typescript';
-
-// Make sure you import the flag-icon-css library in your project entry file
-// import 'flag-icon-css/css/flag-icon.min.css';
-
-const LanguageSelector = () => {
+const LanguageSelector = ({questionNumber, lang}) => {
   const router = useRouter();
-  // const [selectedLanguage, setSelectedLanguage] = useState('de');
-
-  const languageLabels = {
-    ar: 'Arabic',
-    fa: 'Persian',
-    ps: 'Pashto',
-    tr: 'Türkçe',
-    en: 'English',
-    so: 'Somali',
-    ti: 'Tigrinya',
-    ur: 'Urdu',
-    am: 'Amharic',
-    bn: 'Bengali',
-    ru: 'Russian',
-    sq: 'Albanian',
-    uk: 'Ukrainian',
-    sr: 'Serbian'
-    // Add more languages here if needed
-  };
-
-  // Adjust the flag codes as necessary
-  const languageFlags: LanguageFlags = {
-    ar: 'sy', // Assuming Arabic for Syria
-    fa: 'ir', // Persian for Iran
-    ps: 'af', // Pashto for Afghanistan, also fa (Dari) is spoken here
-    tr: 'tr', // Turkish for Turkey
-    en: 'us', // English, using United States as the reference for the English language flag
-    so: 'so', // Somali for Somalia
-    ti: 'er', // Tigrinya for Eritrea
-    ur: 'pk', // Urdu for Pakistan
-    am: 'et', // Amharic for Ethiopia
-    bn: 'bd', // Bengali for Bangladesh
-    ru: 'ru', // Russian for Russia
-    sq: 'al', // Albanian for Albania
-    uk: 'ua', // Ukrainian for Ukraine
-    sr: 'rs', // Serbian for Serbia
-    de: 'de'
-    // Kosovo uses 'xk', a user-assigned code not officially ISO 3166-1
-  };
-
- 
-
-
-  // async function getData(questionNumber, lang: string) {
-  //   const api_url = process.env.API_URL;
-  //   console.log('QuestionLangSelect: api_url', api_url);
-  //   try {
-
-  //     // const buildUrl = `${api_url}/api/${questionNumber}?lang=${lang}`;
-  //     const buildUrl = `http://localhost:3000/api/${questionNumber}?lang=${lang}`;  //gabe
-  //     console.log('QuestionLangSelect: passed to api string', buildUrl);
-  //     const response = await fetch(buildUrl);
-  //     // const response = await fetch(`http://localhost:3000/api/${params.question}?lang=${searchParams.lang}`);
-  //     if (!response.ok) {
-  //       throw new Error(`HTTP error! status: ${response.status}`);
-  //     }
-  //     return await response.json();
-  //   } catch (error) {
-  //     console.error('Failed to fetch product:', error);
-  //   }
-  // }
-
+  
   const handleLanguageChange = async (lang) => {
-    console.log('questionLangSelect: handleLanguageChange(): lang', lang);
-    const data = await getData(3, 'en');
-    router.push(`1-${cleanUrl(data.name)}?lang=${lang}`);
-    // alert(`Language changed to ${lang}`);
+    //console.log('questionLangSelect: handleLanguageChange(): lang', lang);
+    const data = await getData(questionNumber, lang);
+    router.push(`${questionNumber}-${cleanUrl(data.name)}?lang=${lang}`);
   };
+
 
   return (
     <Menu>
       <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-        {/* <span className={`flag-icon flag-icon-${languageFlags[selectedLanguage]} mr-2`}></span>
-        {languageLabels[selectedLanguage]} */}
+         <span className={`flag-icon flag-icon-${languageFlags[lang]} mr-2`}></span>
+       
         Select your mother tongue.
       </MenuButton>
       <MenuList>

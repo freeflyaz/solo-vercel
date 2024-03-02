@@ -1,15 +1,10 @@
-'use server';
-
 import QuestionContainer from '../QuestionConatiner';
 import LanguageSelector from '../QuestionLangSelect';
-//import LanguageSelector from '../../components/LanguageSelector';
 import { Flex, Box, Stack } from '@chakra-ui/react';
 import SwitchLang from '../SwitchLang';
-
 import styles from '../QuestionContainer.module.css';
-import { cleanUrl } from '../util';
+import { cleanUrl, languageFlags } from '../util';
 import { getData } from '../service';
-
 import Link from 'next/link';
 // import { Metadata, ResolvingMetadata } from 'next';
 
@@ -47,64 +42,26 @@ import Link from 'next/link';
 // }
 
 const cleanParamsMakeIntoNumber = (obj) => {
-  // Check if the target property exists and is a string
-console.log('pages: cleanParams: obj: ', obj);
-  // Use the split operation on the 'id' property
-  // Return a new object with the modified 'id' and the rest of the original properties
+  //console.log('pages: cleanParams: obj: ', obj);
   const questionStr = obj.params.question;
   const res = questionStr.split('-', 1)[0];
-  console.log('pages: cleanParams: res: ', res);
+  //console.log('pages: cleanParams: res: ', res);
   return res;
 };
 
-
-
-const languageFlags = {
-  ar: 'sy', // Assuming Arabic for Syria
-  fa: 'ir', // Persian for Iran
-  ps: 'af', // Pashto for Afghanistan, also fa (Dari) is spoken here
-  tr: 'tr', // Turkish for Turkey
-  en: 'us', // English, using United States as the reference for the English language flag
-  so: 'so', // Somali for Somalia
-  ti: 'er', // Tigrinya for Eritrea
-  ur: 'pk', // Urdu for Pakistan
-  am: 'et', // Amharic for Ethiopia
-  bn: 'bd', // Bengali for Bangladesh
-  ru: 'ru', // Russian for Russia
-  sq: 'al', // Albanian for Albania
-  uk: 'ua', // Ukrainian for Ukraine
-  sr: 'rs', // Serbian for Serbia
-  de: 'de'
-  // Kosovo uses 'xk', a user-assigned code not officially ISO 3166-1
-};
-
-export default async function Page(props: any){
-
-
-  // export default async function Page(params: { question?: string }, 
-  //   searchParams: { [key: string]: string | string[] | undefined }
-  // ){
-  
-  
-  console.log('pages here1: Page(): ', props);
+export default async function Page(props: any) {
+  //console.log('pages here1: Page(): ', props);
   const onlyNumberNoText = cleanParamsMakeIntoNumber(props);
-  console.log('pages: Page(): onlyNumberNoText', onlyNumberNoText);
+  //console.log('pages: Page(): onlyNumberNoText', onlyNumberNoText);
   const searchParams = props.searchParams.lang;
   const data = await getData(onlyNumberNoText, searchParams);
-  
-  
-  // console.log('pages: Page(): data', data);
-  
-  
+
   let next = parseInt(data.order) + 1;
   let prev = parseInt(data.order) - 1;
 
   let selectedLanguage = 'en';
   let selectedFlag = 'us';
-  let languageFlags = 'de';
 
-  // const dataPlusOne = getData
-  
   const answerButtonStyle = (answerKey) => {
     return answerKey === data.correct
       ? 'mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full text-left'
@@ -112,18 +69,12 @@ export default async function Page(props: any){
   };
 
   const flip = () => {};
-
-
-
   return (
     <>
       <div className={styles.Container}>
         <Flex justifyContent="center" alignItems="center">
           <Box p="4">
-            <span
-              className={`flag-icon flag-icon-${languageFlags['de']} mr-2`}
-            ></span>
-            <LanguageSelector />
+            <LanguageSelector questionNumber={data.order} lang={searchParams}/>
           </Box>
         </Flex>
         <Box
@@ -151,25 +102,24 @@ export default async function Page(props: any){
               {data.answerC}
             </button>
             <button className={answerButtonStyle('D')} disabled>
-              {data.answerD} 
-            </button> 
+              {data.answerD}
+            </button>
           </Stack>
           <div className={styles.navBottom}>
-             <Link
+            <Link
               href={`${prev}?lang=de`}
               className="px-4 py-2 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 shadow-lg transition duration-150 ease-in-out"
             >
               Prev
             </Link>
-
             <SwitchLang
               selectedLanguage={selectedLanguage}
               selectedFlag={selectedFlag}
               languageFlags={languageFlags}
             />
 
-             <Link
-               href={`${next}-${cleanUrl('1-hdhdhdd')}?lang=de`}
+            <Link
+              href={`${next}-${cleanUrl('1-hdhdhdd')}?lang=de`}
               className="px-4 py-2 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 shadow-lg transition duration-150 ease-in-out"
             >
               Next
