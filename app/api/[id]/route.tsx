@@ -68,10 +68,11 @@ async function translateText(
   targetLanguage: googleTrans['targetLanguage']
 ) {
   const apiKey = 'AIzaSyBUg9CltTctTUz4RORlR7ZMdAmLUb6QKiw'; // Ensure your API key is stored securely
-  const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
+  const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}&format=text`;
 
   try {
     const response = await fetch(url, {
+      
       method: 'POST',
       headers: {
         'Content-Type': 'application/json; charset=utf-8'
@@ -82,7 +83,7 @@ async function translateText(
       })
     });
     const data = await response.json();
-    // console.log(data.data.translations[0].translatedText);
+    console.log(data.data.translations[1].translatedText);
     return data.data.translations.map((t: any) => t.translatedText);
   } catch (error) {
     console.error('Translation error:', error);

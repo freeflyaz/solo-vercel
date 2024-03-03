@@ -114,7 +114,7 @@ export default async function Page(props: any) {
           </Stack>
           <div className={styles.navBottom}>
             <Link
-              href={`${prev}?lang=de`}
+               href={`${prev}-${cleanNextUrl}?lang=${selectedLanguage}`}
               className="px-4 py-2 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 shadow-lg transition duration-150 ease-in-out"
             >
               Prev
@@ -127,7 +127,7 @@ export default async function Page(props: any) {
             />
 
             <Link
-              href={`${next}-${cleanNextUrl}?lang=de`}
+              href={`${next}-${cleanNextUrl}?lang=${selectedLanguage}`}
               className="px-4 py-2 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 shadow-lg transition duration-150 ease-in-out"
             >
               Next
