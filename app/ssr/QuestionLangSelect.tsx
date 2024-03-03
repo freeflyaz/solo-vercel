@@ -6,12 +6,12 @@ import { useRouter } from 'next/navigation';
 import { cleanUrl, languageLabels, languageFlags } from './util';
 import { getData } from './service';
 
-const LanguageSelector = ({questionNumber, lang}) => {
+
+const LanguageSelector = ({questionNumber, lang}: {questionNumber: string, lang: string}) => {
   const router = useRouter();
-  
-  const handleLanguageChange = async (lang) => {
-    //console.log('questionLangSelect: handleLanguageChange(): lang', lang);
-    const data = await getData(questionNumber, lang);
+  const handleLanguageChange = async (lang: string) => {
+    const questionNumberAsNumber = parseInt(questionNumber, 10); // Convert questionNumber to a number
+    const data = await getData(questionNumberAsNumber, lang); // Pass questionNumberAsNumber as an argument
     router.push(`${questionNumber}-${cleanUrl(data.name)}?lang=${lang}`);
   };
 

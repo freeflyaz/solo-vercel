@@ -7,8 +7,11 @@ import { useRouter } from 'next/navigation';
 // import { useState } from 'react';
 import { getData } from './service';
 import { cleanUrl } from './util';
+// Removed unused import statement
+// import PropTypes from 'prop-types';
 
-function SwitchLang({ selectedLanguage, selectedFlag, languageFlags, currentUrl }) {
+// eslint-disable-next-line react/prop-types
+function SwitchLang({ selectedLanguage, selectedFlag }) {
   // const [initialUrl, setInitialUrl] = useState(selectedFlag);
   const router = useRouter();   
   const flip = async () => {

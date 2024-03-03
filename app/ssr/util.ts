@@ -1,4 +1,4 @@
-export function cleanUrl(url) { 
+export function cleanUrl(url: any) { 
     let trimmedString = url.trim();
     let formattedString = trimmedString.replace(/[^\p{L}\p{N}]/gu, '-');
     // \p{L} matches any kind of letter from any language.
@@ -26,7 +26,7 @@ export function cleanUrl(url) {
   };
 
   // Adjust the flag codes as necessary
-  export const languageFlags: LanguageFlags = {
+  export const languageFlags: any  = {
     ar: 'sy', // Assuming Arabic for Syria
     fa: 'ir', // Persian for Iran
     ps: 'af', // Pashto for Afghanistan, also fa (Dari) is spoken here

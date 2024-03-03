@@ -41,7 +41,7 @@ import Link from 'next/link';
 //   return metadata;
 // }
 
-const cleanParamsMakeIntoNumber = (obj) => {
+const cleanParamsMakeIntoNumber = (obj: any) => {
   //console.log('pages: cleanParams: obj: ', obj);
   const questionStr = obj.params.question;
   const res = questionStr.split('-', 1)[0];
@@ -63,7 +63,7 @@ export default async function Page(props: any) {
   let selectedFlag = languageFlags[searchParams];
   const currentUrl = `${onlyNumberNoText}-${cleanUrl(data.name)}?lang=${searchParams}`;
 
-  const answerButtonStyle = (answerKey) => {
+  const answerButtonStyle = (answerKey: any) => {
     return answerKey === data.correct
       ? 'mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full text-left'
       : 'mt-4 bg-gray-100 hover:bg-gray-200 text-black font-bold py-2 px-4 rounded w-full text-left';
@@ -122,8 +122,7 @@ export default async function Page(props: any) {
             <SwitchLang
               selectedLanguage={selectedLanguage}
               selectedFlag={selectedFlag}
-              languageFlags={languageFlags}
-              currentUrl={currentUrl}
+            
             />
 
             <Link
