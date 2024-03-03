@@ -13,8 +13,7 @@ import {
   Menu,
   MenuButton,
   MenuList,
-  MenuItem,
-  
+  MenuItem
 } from '@chakra-ui/react';
 import { ChevronDownIcon, HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 // import Image from 'next/image'; // Uncomment if you're using Image from 'next/image'
@@ -61,34 +60,28 @@ const NavBar = () => {
           flexGrow={1}
           mt={{ base: 4, md: 0 }}
         >
-        
           <Menu>
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-              150 Frage
+              Frage App
             </MenuButton>
             <MenuList>
-              <MenuItem> 30</MenuItem>
               <MenuItem
                 as="a"
                 href="/ssr/1-Deutschland-ist-ein-Rechtsstaat--Was-ist-damit-gemeint-?lang=de"
               >
-                60
+                1 - 30
               </MenuItem>
-              <MenuItem>90</MenuItem>
-              <MenuItem>120</MenuItem>
-              <MenuItem>150</MenuItem>
             </MenuList>
           </Menu>
+
           <Menu>
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-              300 Frage
+              Test App
             </MenuButton>
             <MenuList>
-              <MenuItem>180</MenuItem>
-              <MenuItem>210</MenuItem>
-              <MenuItem>240</MenuItem>
-              <MenuItem>270</MenuItem>
-              <MenuItem>300</MenuItem>
+              <MenuItem as="a" href="/">
+                Go
+              </MenuItem>
             </MenuList>
           </Menu>
         </Stack>
@@ -99,17 +92,17 @@ const NavBar = () => {
           flexGrow={1}
           mt={{ base: 4, md: 0 }}
         >
-          <Button
+          {/* <Button
             size="md"
             rounded="md"
-            colorScheme="purple"
+            colorScheme="Gray"
             ml="4"
             onClick={() => {
               // handle donate button click
             }}
           >
             Einbürgerungstest App
-          </Button>
+          </Button> */}
         </Stack>
       </Box>
     </Flex>
