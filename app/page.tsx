@@ -21,9 +21,9 @@ export default function Home() {
   const color = useColorModeValue('black', 'white');
   return (
     <>
-    {/* <NavBar /> */}
+    <NavBar />
    
-    {/* <ContainerQuiz />  */}
+     <ContainerQuiz />  
     </>
   );
 }

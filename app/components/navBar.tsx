@@ -1,3 +1,4 @@
+'use client';
 // import Link from 'next/link';
 import React from 'react';
 import {
@@ -13,7 +14,7 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  Link
+  
 } from '@chakra-ui/react';
 import { ChevronDownIcon, HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 // import Image from 'next/image'; // Uncomment if you're using Image from 'next/image'
@@ -36,15 +37,7 @@ const NavBar = () => {
     >
       <Flex align="center" mr={5}>
         <Text fontSize="lg" fontWeight="bold">
-          Einbürgerungstest
-          {/* Uncomment below once you have your image in public/images */}
-          {/* <Image
-            src="/images/logo.jpeg"
-            alt="Logo"
-            width={50}
-            height={50}
-            layout="fixed"
-          /> */}
+          <a href="/">Einbürgerungstest </a>
         </Text>
       </Flex>
 
@@ -68,14 +61,19 @@ const NavBar = () => {
           flexGrow={1}
           mt={{ base: 4, md: 0 }}
         >
-          {/* Place your menu items here */}
+        
           <Menu>
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
               150 Frage
             </MenuButton>
             <MenuList>
-            <MenuItem> 30</MenuItem>
-            <MenuItem as='a' href='#'>Link 1</MenuItem>
+              <MenuItem> 30</MenuItem>
+              <MenuItem
+                as="a"
+                href="/ssr/1-Deutschland-ist-ein-Rechtsstaat--Was-ist-damit-gemeint-?lang=de"
+              >
+                60
+              </MenuItem>
               <MenuItem>90</MenuItem>
               <MenuItem>120</MenuItem>
               <MenuItem>150</MenuItem>
@@ -101,17 +99,17 @@ const NavBar = () => {
           flexGrow={1}
           mt={{ base: 4, md: 0 }}
         >
-        <Button
-          size="md"
-          rounded="md"
-          colorScheme="purple"
-          ml="4"
-          onClick={() => {
-            // handle donate button click
-          }}
-        >
-          Einbürgerungstest App
-        </Button>
+          <Button
+            size="md"
+            rounded="md"
+            colorScheme="purple"
+            ml="4"
+            onClick={() => {
+              // handle donate button click
+            }}
+          >
+            Einbürgerungstest App
+          </Button>
         </Stack>
       </Box>
     </Flex>
