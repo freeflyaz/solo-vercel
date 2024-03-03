@@ -44,3 +44,25 @@ export function cleanUrl(url: any) {
     de: 'de'
     // Kosovo uses 'xk', a user-assigned code not officially ISO 3166-1
   };
+
+
+
+
+export const countryToLanguage = {
+  sy: 'ar', // Syria to Arabic
+  ir: 'fa', // Iran to Persian
+  af: 'ps', // Afghanistan to Pashto (Note: Dari, also spoken in Afghanistan, is not included here as the mapping is one-to-one)
+  tr: 'tr', // Turkey to Turkish
+  us: 'en', // United States to English
+  so: 'so', // Somalia to Somali
+  er: 'ti', // Eritrea to Tigrinya
+  pk: 'ur', // Pakistan to Urdu
+  et: 'am', // Ethiopia to Amharic
+  bd: 'bn', // Bangladesh to Bengali
+  ru: 'ru', // Russia to Russian
+  al: 'sq', // Albania to Albanian
+  ua: 'uk', // Ukraine to Ukrainian
+  rs: 'sr', // Serbia to Serbian
+  de: 'de'  // Germany to German
+};
+
