@@ -61,6 +61,7 @@ export default async function Page(props: any) {
 
   let selectedLanguage = searchParams;
   let selectedFlag = languageFlags[searchParams];
+  const currentUrl = `${onlyNumberNoText}-${cleanUrl(data.name)}?lang=${searchParams}`;
 
   const answerButtonStyle = (answerKey) => {
     return answerKey === data.correct
@@ -74,7 +75,7 @@ export default async function Page(props: any) {
   //console.log('nextQuestion', nextQuestion.name);
 
 
-  const flip = () => {};
+  // const flip = () => {};
   return (
     <>
       <div className={styles.Container}>
@@ -122,6 +123,7 @@ export default async function Page(props: any) {
               selectedLanguage={selectedLanguage}
               selectedFlag={selectedFlag}
               languageFlags={languageFlags}
+              currentUrl={currentUrl}
             />
 
             <Link
