@@ -122,6 +122,7 @@ export default async function Page(props: any) {
             <SwitchLang
               selectedLanguage={selectedLanguage}
               selectedFlag={selectedFlag}
+              questionNumber={onlyNumberNoText}
             
             />
 

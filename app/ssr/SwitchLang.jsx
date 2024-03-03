@@ -7,7 +7,7 @@ import 'flag-icon-css/css/flag-icons.min.css'; // For flag icons
 import { getData } from './service';
 import { cleanUrl, countryToLanguage } from './util';
 
-function SwitchLang({ selectedLanguage, selectedFlag }) {
+function SwitchLang({ selectedLanguage, selectedFlag, questionNumber }) {
   // Initialize the flags with German as the top flag and the selected flag as the bottom flag
   const [topFlag, setTopFlag] = useState('de');
   const [bottomFlag, setBottomFlag] = useState(selectedFlag);
@@ -42,10 +42,10 @@ function SwitchLang({ selectedLanguage, selectedFlag }) {
     console.log('languageCode: ', languageCode);
     // Fetch data for the new language if necessary
     // Assuming getData is needed for something like updating the UI
-    const data = await getData(1, languageCode);
+    const data = await getData(questionNumber, languageCode);
 
     // Assuming you need to do something with the data, like clean the URL
-    const pushUrl = `/ssr/1-${cleanUrl(data.name)}?lang=${languageCode}`;
+    const pushUrl = `/ssr/${questionNumber}-${cleanUrl(data.name)}?lang=${languageCode}`;
 
     // Navigate to the new URL
     router.push(pushUrl);
