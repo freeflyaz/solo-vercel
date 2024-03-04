@@ -1,4 +1,3 @@
-import QuestionContainer from '../QuestionConatiner';
 import LanguageSelector from '../QuestionLangSelect';
 import { Flex, Box, Stack } from '@chakra-ui/react';
 import SwitchLang from '../SwitchLang';
@@ -68,7 +67,7 @@ export default async function Page(props: any) {
   const answerButtonStyle = (answerKey: any) => {
     return answerKey === data.correct
       ? 'mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full text-left'
-      : 'mt-4 bg-gray-100 hover:bg-gray-200 text-black font-bold py-2 px-4 rounded w-full text-left';
+      : 'mt-4 bg-gray-100 hover:bg-gray-200 text-black  py-2 px-4 rounded w-full text-left';
   };
 
   //console.log(next, searchParams);
