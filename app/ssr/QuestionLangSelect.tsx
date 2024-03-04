@@ -7,12 +7,13 @@ import { cleanUrl, languageLabels, languageFlags } from './util';
 import { getData } from './service';
 
 
-const LanguageSelector = ({questionNumber, lang}: {questionNumber: string, lang: string}) => {
+const LanguageSelector = ({questionNumber, lang}: {questionNumber: string, lang: string}) => { //gabe dont need the land here
   const router = useRouter();
-  const handleLanguageChange = async (lang: string) => {
+
+  const handleLanguageChange = async (langCode: string) => {
     const questionNumberAsNumber = parseInt(questionNumber, 10); // Convert questionNumber to a number
-    const data = await getData(questionNumberAsNumber, lang); // Pass questionNumberAsNumber as an argument
-    router.push(`${questionNumber}-${cleanUrl(data.name)}?lang=${lang}`);
+    const data = await getData(questionNumberAsNumber, langCode); // Pass questionNumberAsNumber as an argument 
+    router.push(`${questionNumber}-${cleanUrl(data.name)}?lang=${langCode}`);
   };
 
 

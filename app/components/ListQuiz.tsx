@@ -1,4 +1,4 @@
-import QuizMode from './quizMode';
+import QuizMode from './QuizMode';
 
  import { QuizModeProps } from '../typescript';
 

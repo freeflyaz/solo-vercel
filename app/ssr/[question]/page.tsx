@@ -53,11 +53,18 @@ export default async function Page(props: any) {
   const onlyNumberNoText = cleanParamsMakeIntoNumber(props);
   //console.log('pages: Page(): onlyNumberNoText', onlyNumberNoText);
   const searchParams = props.searchParams.lang;
+  const searchParamOldLang = props.searchParams.oldLang; 
+  
+  console.log('pages: Page(): searchParamOldLang', searchParamOldLang);
+
+
   const data = await getData(onlyNumberNoText, searchParams);
 
   let next = parseInt(data.order) + 1;
   let prev = parseInt(data.order) - 1;
 
+  
+  //console.log(props);
   let selectedLanguage = searchParams;
   let selectedFlag = languageFlags[searchParams];
   const currentUrl = `${onlyNumberNoText}-${cleanUrl(
@@ -138,6 +145,7 @@ export default async function Page(props: any) {
               selectedLanguage={selectedLanguage}
               selectedFlag={selectedFlag}
               questionNumber={onlyNumberNoText}
+              searchParamOldLang={searchParamOldLang}
             />
 
             <Link

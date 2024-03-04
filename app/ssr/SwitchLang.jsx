@@ -1,53 +1,50 @@
 'use client';
-import React, { useState } from 'react'; // Import useState directly from 'react'
+import React, { useState, useEffect } from 'react'; // Import useState directly from 'react'
 import { useRouter } from 'next/navigation'; // Ensure this is the correct import path for useRouter
 import { PiArrowBendUpLeft, PiArrowBendDownRight } from 'react-icons/pi';
 import styles from './SwitchLang.module.css';
 import 'flag-icon-css/css/flag-icons.min.css'; // For flag icons
 import { getData } from './service';
-import { cleanUrl, countryToLanguage } from './util';
+import { cleanUrl, countryToLanguage, languageFlags } from './util';
 
-function SwitchLang({ selectedLanguage, selectedFlag, questionNumber }) {
+function SwitchLang({
+  selectedLanguage,
+  selectedFlag,
+  questionNumber,
+  searchParamOldLang
+}) {
   // Initialize the flags with German as the top flag and the selected flag as the bottom flag
-  const [topFlag, setTopFlag] = useState('de');
+  const [topFlag, setTopFlag] = useState(languageFlags[searchParamOldLang]);
   const [bottomFlag, setBottomFlag] = useState(selectedFlag);
   const [switchLanguage, setSwitchLanguage] = useState('de');
+  //const [mysearchParamOldLang, setSearchParamOldLang] = useState(searchParamOldLang)
 
   const router = useRouter();
   //console.log('before click: ', topFlag, bottomFlag);
 
+  useEffect(() => {
+    console.log('topFlag Changed: ', topFlag);
+
+  }, [topFlag]);
+
   const flip = async () => {
-    // Swap the flags
-
-    //console.log('after click: ', topFlag, bottomFlag);
-    //console.log('after click bottom flag: ', bottomFlag);
-
-    // let newLang = '';
-    // console.log(bottomFlag);
-    // if (bottomFlag === 'de') setBottomFlag('us');
-    // else setBottomFlag('de');
-    // console.log(bottomFlag);
-
+ 
     setTopFlag(bottomFlag);
     setBottomFlag(topFlag);
-    setSwitchLanguage(bottomFlag);
-    //console.log('switchLanguage: ', switchLanguage);
-
-    // alert('selectedLanguage: ' + selectedLanguage);
-    // alert('selectedFlag: ' + selectedFlag);
-    // alert('topFlag: ' + topFlag);
-    // alert('bottomFlag: ' + bottomFlag);
+    setSwitchLanguage(topFlag);
+    
 
     const languageCode = countryToLanguage[switchLanguage];
     console.log('languageCode: ', languageCode);
-    // Fetch data for the new language if necessary
-    // Assuming getData is needed for something like updating the UI
+
     const data = await getData(questionNumber, languageCode);
 
-    // Assuming you need to do something with the data, like clean the URL
-    const pushUrl = `/ssr/${questionNumber}-${cleanUrl(data.name)}?lang=${languageCode}`;
+    
+    const pushUrl = `/ssr/${questionNumber}-${cleanUrl(
+      data.name
+    )}?lang=${languageCode}&oldLang=${selectedLanguage}`;
 
-    // Navigate to the new URL
+    
     router.push(pushUrl);
   };
 
