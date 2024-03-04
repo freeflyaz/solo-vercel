@@ -53,19 +53,17 @@ export default async function Page(props: any) {
   const onlyNumberNoText = cleanParamsMakeIntoNumber(props);
   //console.log('pages: Page(): onlyNumberNoText', onlyNumberNoText);
   const searchParams = props.searchParams.lang;
-  const searchParamOldLang = props.searchParams.oldLang; 
-  
+  const searchParamOldLang = props.searchParams.oldLang;
+
   console.log('pages: Page(): searchParamOldLang', searchParamOldLang);
 
-  
-console.log(searchParams);
+  console.log(searchParams);
   const data = await getData(onlyNumberNoText, searchParams);
-  if (data  === undefined) return null;
+  if (data === undefined) return null;
 
   let next = parseInt(data.order) + 1;
   let prev = parseInt(data.order) - 1;
 
-  
   //console.log(props);
   let selectedLanguage = searchParams;
   let selectedFlag = languageFlags[searchParams];
@@ -83,6 +81,21 @@ console.log(searchParams);
   const nextQuestion = await getData(next, searchParams);
   const cleanNextUrl = cleanUrl(nextQuestion.name);
   //console.log('nextQuestion', nextQuestion.name);
+
+  function generateHref() {
+    let href = '#'; // Default URL if none of the conditions are met
+  
+    if (prev >= 1 && searchParamOldLang === undefined) {
+      // Condition 1: Previous page exists and 'searchParamOldLang' is undefined
+      href = `${prev}-${cleanNextUrl}?lang=${selectedLanguage}`;
+    } else if (prev >= 1 && searchParamOldLang !== undefined) {
+      // Condition 2: Previous page exists and 'searchParamOldLang' is defined
+      // It seems like there might be a mistake in using `next` instead of `prev` based on your description
+      href = `${prev}-${cleanNextUrl}?lang=${selectedLanguage}&oldLang=${searchParamOldLang}`;
+    }
+  
+    return href;
+  }
 
   // const flip = () => {};
   return (
@@ -130,11 +143,7 @@ console.log(searchParams);
           </Stack>
           <div className={styles.navBottom}>
             <Link
-              href={
-                prev >= 1
-                  ? `${prev}-${cleanNextUrl}?lang=${selectedLanguage}`
-                  : '#'
-              }
+              href={generateHref()}
               className={`px-4 py-2 bg-green-500 text-white font-semibold rounded-md shadow-lg transition duration-150 ease-in-out ${
                 prev < 1
                   ? 'cursor-not-allowed bg-green-300 shadow-sm'
@@ -151,7 +160,11 @@ console.log(searchParams);
             />
 
             <Link
-              href={`${next}-${cleanNextUrl}?lang=${selectedLanguage}&oldLang=${searchParamOldLang}`}
+              href={
+                searchParamOldLang === undefined
+                  ? `${next}-${cleanNextUrl}?lang=${selectedLanguage}`
+                  : `${next}-${cleanNextUrl}?lang=${selectedLanguage}&oldLang=${searchParamOldLang}`
+              }
               className="px-4 py-2 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 shadow-lg transition duration-150 ease-in-out"
             >
               Next
