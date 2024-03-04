@@ -1,6 +1,7 @@
 // type definitions not pretty
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/prisma/client';
+import { env } from 'process';
 
 interface googleTrans {
   text: string[];
@@ -17,27 +18,34 @@ export async function GET(
     const question = await prisma.question.findUnique({
       where: { order: Number(params.id) }
     });
-
+    
+    if (!question)
+      return NextResponse.json(
+        { error: 'question not found' },
+        { status: 404 }
+      );
     // console.log(params.id);
     const lang = request.nextUrl.searchParams.get('lang');
-  //   console.log(lang);
-    const userLanguage = lang;
-   //console.log(question);
-
-    const textsToTranslate =[
-      
-      question?.name,
-      question?.answerA,    
-      question?.answerB,
-      question?.answerC,
-      question?.answerD,
-      question?.correct
-    ]
+    //   console.log(lang);
+  const userLanguage = lang;
+  //console.log(question);
+  let textsToTranslate: string[] = [];
+  
+  if (question) {
+    textsToTranslate = [
+      question.name,
+        question.answerA,
+        question.answerB,
+        question.answerC,
+        question.answerD,
+        question.correct,
+      ];
+    }
    // console.log('textsToTranslate array: ', textsToTranslate);
 
-    const filteredTextsToTranslate = textsToTranslate.filter((text) => text !== undefined) as string[];
+    //const filteredTextsToTranslate = textsToTranslate.filter((text) => text !== undefined) as string[];
 
-    const translations = await translateText(filteredTextsToTranslate, userLanguage);
+    const translations = await translateText(textsToTranslate, userLanguage);
 
      //console.log('translations:', translations);
 
@@ -48,12 +56,7 @@ export async function GET(
       question.answerC = translations[3];
       question.answerD = translations[4];
     }
-
-    if (!question)
-      return NextResponse.json(
-        { error: 'question not found' },
-        { status: 404 }
-      );
+    
 
     return NextResponse.json(question);
   } catch (error: any) {
@@ -69,7 +72,7 @@ async function translateText(
   text: googleTrans['text'],
   targetLanguage: googleTrans['targetLanguage']
 ) {
-  const apiKey = 'AIzaSyBUg9CltTctTUz4RORlR7ZMdAmLUb6QKiw'; // Ensure your API key is stored securely
+  const apiKey = process.env.API_KEY;
   const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}&format=text`;
 
   try {
