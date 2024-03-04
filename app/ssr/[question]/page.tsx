@@ -99,6 +99,13 @@ export default async function Page(props: any) {
           minH="450px"
         >
           {data.name}
+          {data.image == 'y' && (
+            <img
+              src={`../images/${data.order}.png`}
+              alt={data.name}
+              className="object-scale-down h-48 w-96"
+            />
+          )}
           <Stack spacing={0} direction="column" mt={0}>
             <button className={answerButtonStyle('A')} disabled>
               {data.answerA}
@@ -114,15 +121,20 @@ export default async function Page(props: any) {
             </button>
           </Stack>
           <div className={styles.navBottom}>
-          <Link
-  href={prev >= 1 ? `${prev}-${cleanNextUrl}?lang=${selectedLanguage}` : '#'}
-  className={`px-4 py-2 bg-green-500 text-white font-semibold rounded-md shadow-lg transition duration-150 ease-in-out ${
-    prev < 1 ? 'cursor-not-allowed bg-green-300 shadow-sm' : 'hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50'
-  }`}
-  
->
-  Prev
-</Link>
+            <Link
+              href={
+                prev >= 1
+                  ? `${prev}-${cleanNextUrl}?lang=${selectedLanguage}`
+                  : '#'
+              }
+              className={`px-4 py-2 bg-green-500 text-white font-semibold rounded-md shadow-lg transition duration-150 ease-in-out ${
+                prev < 1
+                  ? 'cursor-not-allowed bg-green-300 shadow-sm'
+                  : 'hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50'
+              }`}
+            >
+              Prev
+            </Link>
             <SwitchLang
               selectedLanguage={selectedLanguage}
               selectedFlag={selectedFlag}

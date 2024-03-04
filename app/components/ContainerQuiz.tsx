@@ -14,7 +14,7 @@ import '../App.css';
 const Container = () => {
   const [eventList, setEventList] = useState<EventList>(
     {
-      name: 'In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil …',
+      name: 'Was steht nicht im Grundgesetz von Deutschland?"',
       correct: 'D',
       answerA: 'hier Religionsfreiheit gilt.',
       answerB: 'die Menschen Steuern zahlen.',

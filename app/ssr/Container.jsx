@@ -1,19 +1,15 @@
-'use client'
+'use client';
 import List from './List';
 import LanguageSelector from '../components/LanguageSelector';
 import { Flex, Box, Button, useColorModeValue } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
-import { PiArrowBendUpLeft, PiArrowBendDownRight  } from "react-icons/pi";
+import { PiArrowBendUpLeft, PiArrowBendDownRight } from 'react-icons/pi';
 import styles from '../components/Container.module.css';
 import Link from 'next/link';
 
 import '../App.css';
 
-
-
-
-
-const Container = ({questionNumber,lang}) => {
+const Container = ({ questionNumber, lang }) => {
   console.log('lang', lang);
   const firstLanguage = lang ? lang : 'de';
   console.log('firstLanguage', firstLanguage);
@@ -93,64 +89,80 @@ const Container = ({questionNumber,lang}) => {
     de: 'de'
     // Kosovo uses 'xk', a user-assigned code not officially ISO 3166-1
   };
-  
-  
 
   return (
     <div className={styles.Container}>
       <Flex justifyContent="center" alignItems="center">
-        <Box p="4" >
-      <span className={`flag-icon flag-icon-${languageFlags[selectedLanguage]} mr-2`}></span>
+        <Box p="4">
+          <span
+            className={`flag-icon flag-icon-${languageFlags[selectedLanguage]} mr-2`}
+          ></span>
           <LanguageSelector onLanguageChange={handleLanguageChange} />
         </Box>
       </Flex>
 
       <Box
-      bg={useColorModeValue('white', 'gray.700')}
-      p={8}
-      maxW="md"
-      borderWidth={1} 
-      borderRadius={8}
-      boxShadow="lg"
-      mx="auto"
-    >
-      <List eventList={eventList} />
-      <div className={styles.navBottom}>
-     
-      <Button colorScheme="green" onClick={() => prevQuestion()}>Prev</Button>
-      {/* <button className="round-button" >
+        bg={useColorModeValue('white', 'gray.700')}
+        p={8}
+        maxW="md"
+        borderWidth={1}
+        borderRadius={8}
+        boxShadow="lg"
+        mx="auto"
+      >
+        <List eventList={eventList} />
+        <div className={styles.navBottom}>
+          <Button colorScheme="green" onClick={() => prevQuestion()}>
+            Prev
+          </Button>
+          {/* <button className="round-button" >
   +
 </button> */}
 
-
-
-<button 
-className={`${styles.roundButton} ${selectedLanguage === 'de' && selectedFlag === 'de' ? styles.roundButtonDisabled : ''}`}
- onClick={() => flip()}
- disabled={selectedLanguage === 'de' && selectedFlag === 'de' ? true : false} 
->
-    <PiArrowBendUpLeft className={styles.arrowLeft}/>
-    <div className={`flag-icon flag-icon-${languageFlags[selectedLanguage]} ${styles.flagRight}`}></div>
-    <div className={`flag-icon flag-icon-${languageFlags[selectedFlag]} ${styles.flagLeft}`}></div>
-    <PiArrowBendDownRight className={styles.arrowRight}/>
-  </button>
-  <Button colorScheme="green" onClick={() => nextQuestion()}>Next</Button>
-
-
-      </div>
+          <button
+            className={`${styles.roundButton} ${
+              selectedLanguage === 'de' && selectedFlag === 'de'
+                ? styles.roundButtonDisabled
+                : ''
+            }`}
+            onClick={() => flip()}
+            disabled={
+              selectedLanguage === 'de' && selectedFlag === 'de' ? true : false
+            }
+          >
+            <PiArrowBendUpLeft className={styles.arrowLeft} />
+            <div
+              className={`flag-icon flag-icon-${languageFlags[selectedLanguage]} ${styles.flagRight}`}
+            ></div>
+            <div
+              className={`flag-icon flag-icon-${languageFlags[selectedFlag]} ${styles.flagLeft}`}
+            ></div>
+            <PiArrowBendDownRight className={styles.arrowRight} />
+          </button>
+          <Button colorScheme="green" onClick={() => nextQuestion()}>
+            Next
+          </Button>
+        </div>
       </Box>
-      
 
       <div className="text-center p-6">
-      <Link href={`/learning/${Number(currentQuestionId)-1}?lang=${selectedLanguage}`}>
-      &lt;  &nbsp; 
-  </Link>
+        <Link
+          href={`/learning/${
+            Number(currentQuestionId) - 1
+          }?lang=${selectedLanguage}`}
+        >
+          &lt; &nbsp;
+        </Link>
 
-      <span>{currentQuestionId} of 301</span>
-      
-      <Link href={`/learning/${Number(currentQuestionId)+1}?lang=${selectedLanguage}`}>
-      &nbsp; &gt;
-  </Link>
+        <span>{currentQuestionId} of 301</span>
+
+        <Link
+          href={`/learning/${
+            Number(currentQuestionId) + 1
+          }?lang=${selectedLanguage}`}
+        >
+          &nbsp; &gt;
+        </Link>
 
         {/* <Button colorScheme="green" onClick={() => flip()}>
           show me in: 
@@ -158,7 +170,6 @@ className={`${styles.roundButton} ${selectedLanguage === 'de' && selectedFlag ==
             className={`flag-icon flag-icon-${languageFlags[selectedFlag]} mr-2`}
           ></span>
         </Button> */}
-       
       </div>
     </div>
   );
