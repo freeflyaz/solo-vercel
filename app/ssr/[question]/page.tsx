@@ -12,16 +12,23 @@ import Link from 'next/link';
 //   searchParams: { [key: string]: string | string[] | undefined };
 // };
 
-// export async function generateMetadata(
-//   { params, searchParams }: Props,
-//   parent: ResolvingMetadata
-// ): Promise<Metadata> {
+export async function generateStaticParams() {
+  //const posts = await fetch('https://.../posts').then((res) => res.json())
+ 
+  return [ 
+    {question: '1-Deutschland-ist-ein-Rechtsstaat--Was-ist-damit-gemeint-?lang=de'},
+    {question: '2?lang=de'},
+  ]
+}
+
+
+export async function generateMetadata( props : Props, parent: ResolvingMetadata ): Promise<Metadata> {
 //   let data; //
 //  const api_url = process.env.API_URL;
 //   // fetch data
 //   try {
-//      const response = await fetch(`${api_url}/api/${params.question}?lang=${searchParams.lang}`);
-//     // const response = await fetch(`http://localhost:3000/api/${params.question}?lang=${searchParams.lang}`);
+//     // const response = await fetch(`${api_url}/api/${params.question}?lang=${searchParams.lang}`);
+//      const response = await fetch(`http://localhost:3000/api/${params.question}?lang=${searchParams.lang}`);
 //     if (!response.ok) {
 //       throw new Error(`HTTP error! status: ${response.status}`);
 //     }
@@ -31,14 +38,23 @@ import Link from 'next/link';
 //     console.error("Failed to fetch product:", error);
 
 //   }
-
-//   const metadata: Metadata =  {
-//     title: data.order + ' - ' + data.name ,
-//     description: data.order + ' - ' + data.name
-//   };
-
-//   return metadata;
-// }
+const onlyNumberNoText = cleanParamsMakeIntoNumber(props);
+//console.log('pages: Page(): onlyNumberNoText', onlyNumberNoText);
+const searchParams = props.searchParams.lang;
+const data = await getData(onlyNumberNoText, searchParams);
+console.log('data', data);
+  const metadata: Metadata =  {
+    title: 'Einbürgerungstest: ' + data.order + ' - ' + data.name ,
+    description: data.order + ' - ' + data.name
+  };
+  
+  
+  // const metadata: Metadata =  {
+  //   title: 'gabe',
+  //   description: 'mata'
+  // };
+  return metadata;
+}
 
 const cleanParamsMakeIntoNumber = (obj: any) => {
   //console.log('pages: cleanParams: obj: ', obj);

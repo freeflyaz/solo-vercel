@@ -31,6 +31,11 @@ function SwitchLang({
   let topFlag = languageFlags[searchParamOldLang];
   let bottomFlag = selectedFlag;
 
+  if (!topFlag) {
+    //gabe
+    topFlag = 'de';
+  }
+
   const flip = async () => {
     //   setTopFlag(bottomFlag);
     //    setBottomFlag(topFlag);
@@ -52,22 +57,25 @@ function SwitchLang({
 
     router.push(pushUrl);
   };
+  console.log(topFlag, bottomFlag);
 
   return (
-    <button
-      className={`${styles.roundButton} ${selectedFlag}`}
-      onClick={flip}
-      // disabled={selectedLanguage === 'de' && selectedFlag === 'de'}
-    >
-      <PiArrowBendUpLeft className={styles.arrowLeft} />
-      <div
-        className={`flag-icon flag-icon-${topFlag} ${styles.flagRight}`}
-      ></div>
-      <div
-        className={`flag-icon flag-icon-${bottomFlag} ${styles.flagLeft}`}
-      ></div>
-      <PiArrowBendDownRight className={styles.arrowRight} />
-    </button>
+    <>
+      <button
+        className={`${styles.roundButton} ${selectedFlag}`}
+        onClick={flip}
+        disabled={topFlag === 'de' && bottomFlag === 'de' ? true : false}
+      >
+        <PiArrowBendUpLeft className={styles.arrowLeft} />
+        <div
+          className={`flag-icon flag-icon-${topFlag} ${styles.flagRight}`}
+        ></div>
+        <div
+          className={`flag-icon flag-icon-${bottomFlag} ${styles.flagLeft}`}
+        ></div>
+        <PiArrowBendDownRight className={styles.arrowRight} />
+      </button>
+    </>
   );
 }
 
