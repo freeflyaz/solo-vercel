@@ -11,16 +11,18 @@ export async function GET(
   request: NextRequest,
   { params }: { params: { id: number } }
 ) {
+
+  //console.log('From API. passed to api: ' + params.id + ' - ' + request.nextUrl.searchParams.get('lang')); //You can change this and just pass a string and not an object//gabe
   try {
-    // console.log('From API. passed to api' + params.id + ' - ' + request.nextUrl.searchParams.get('lang')); //You can change this and just pass a string and not an object//gabe
     const question = await prisma.question.findUnique({
       where: { order: Number(params.id) }
     });
 
     // console.log(params.id);
     const lang = request.nextUrl.searchParams.get('lang');
-    // console.log(lang);
+  //   console.log(lang);
     const userLanguage = lang;
+   //console.log(question);
 
     const textsToTranslate =[
       
@@ -31,13 +33,13 @@ export async function GET(
       question?.answerD,
       question?.correct
     ]
-    // console.log(textsToTranslate);
+   // console.log('textsToTranslate array: ', textsToTranslate);
 
     const filteredTextsToTranslate = textsToTranslate.filter((text) => text !== undefined) as string[];
 
     const translations = await translateText(filteredTextsToTranslate, userLanguage);
 
-    // console.log(translations);
+     //console.log('translations:', translations);
 
     if (question) {
       question.name = translations[0];
@@ -83,7 +85,7 @@ async function translateText(
       })
     });
     const data = await response.json();
-    console.log(data.data.translations[1].translatedText);
+    //console.log(data.data.translations[1].translatedText);
     return data.data.translations.map((t: any) => t.translatedText);
   } catch (error) {
     console.error('Translation error:', error);

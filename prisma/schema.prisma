@@ -19,7 +19,7 @@ model Question {
   answerC  String
   answerD  String
   correct  String
-  image    String 
+  image    String?
 }
 
 
