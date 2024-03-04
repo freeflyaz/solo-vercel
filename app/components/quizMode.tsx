@@ -55,7 +55,14 @@ const QuizMode: React.FC<QuizModeProps> = ({ eventList, setReady, handleAnswerSu
   return (
     <>
       
-      <div className='p-4' >{eventList.name}</div>
+      <div className='p-4' >
+        {eventList.name}
+      
+        {eventList.image == 'y' && (
+          <img src={`../images/${eventList.order}.png`} alt={eventList.name} 
+          className='object-scale-down h-48 w-96' />
+        )}
+      </div>
       <button
         id="A"
         className={buttonAStyle === 'basic' ? basic : buttonAStyle}
