@@ -61,11 +61,11 @@ const Container = () => {
 
   const handleLanguageChange = (lang: string) => {
     if (lang !== 'de') {
-      setLastSelectedLanguage(lang); // Update the last selected non-German language for flipping
+      setLastSelectedLanguage(lang); 
       setSelectedFlag('de');
     }
     setSelectedLanguage(lang);
-    // setIsFlipped(false); // Reset flip state when language is changed manually
+    
   };
 
   function nextQuestion() {
