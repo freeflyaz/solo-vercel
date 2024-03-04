@@ -69,7 +69,7 @@ const NavBar = () => {
                 as="a"
                 href="/ssr/1-Deutschland-ist-ein-Rechtsstaat--Was-ist-damit-gemeint-?lang=de"
               >
-                1 - 30
+                Von Frage 1
               </MenuItem>
             </MenuList>
           </Menu>

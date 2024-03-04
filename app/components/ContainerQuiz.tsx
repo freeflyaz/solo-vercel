@@ -42,7 +42,7 @@ const Container = () => {
     const response = await fetch(`${baseUrl}/api/${currentQuestionId}?lang=${selectedLanguage}`);
     const questions = await response.json();
     setEventList(questions);
-    console.log(questions);
+    console.log('eventList: ', questions);
   }
 
   useEffect(() => {
@@ -174,15 +174,8 @@ className={`${styles.roundButton} ${selectedLanguage === 'de' && selectedFlag ==
       
 
       <div className="text-center p-6">
-        
       <span>{currentQuestionId} of 301</span>
 
-        {/* <Button colorScheme="green" onClick={() => flip()}>
-          show me in: 
-          <span
-            className={`flag-icon flag-icon-${languageFlags[selectedFlag]} mr-2`}
-          ></span>
-        </Button> */}
        
       </div>
     </div>

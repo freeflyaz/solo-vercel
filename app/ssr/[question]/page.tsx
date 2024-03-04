@@ -61,7 +61,9 @@ export default async function Page(props: any) {
 
   let selectedLanguage = searchParams;
   let selectedFlag = languageFlags[searchParams];
-  const currentUrl = `${onlyNumberNoText}-${cleanUrl(data.name)}?lang=${searchParams}`;
+  const currentUrl = `${onlyNumberNoText}-${cleanUrl(
+    data.name
+  )}?lang=${searchParams}`;
 
   const answerButtonStyle = (answerKey: any) => {
     return answerKey === data.correct
@@ -70,10 +72,9 @@ export default async function Page(props: any) {
   };
 
   //console.log(next, searchParams);
-  const nextQuestion = await getData((next), searchParams);
+  const nextQuestion = await getData(next, searchParams);
   const cleanNextUrl = cleanUrl(nextQuestion.name);
   //console.log('nextQuestion', nextQuestion.name);
-
 
   // const flip = () => {};
   return (
@@ -81,13 +82,13 @@ export default async function Page(props: any) {
       <div className={styles.Container}>
         <Flex justifyContent="center" alignItems="center">
           <Box p="4">
-            <LanguageSelector questionNumber={data.order} lang={searchParams}/>
+            <LanguageSelector questionNumber={data.order} lang={searchParams} />
           </Box>
         </Flex>
         <Box
           display="flex"
           flexDirection="column"
-          justifyContent="space-between" 
+          justifyContent="space-between"
           bg="white"
           p={8}
           maxW="md"
@@ -95,7 +96,7 @@ export default async function Page(props: any) {
           borderRadius={8}
           boxShadow="lg"
           mx="auto"
-          minH="450px" 
+          minH="450px"
         >
           {data.name}
           <Stack spacing={0} direction="column" mt={0}>
@@ -113,17 +114,19 @@ export default async function Page(props: any) {
             </button>
           </Stack>
           <div className={styles.navBottom}>
-            <Link
-               href={`${prev}-${cleanNextUrl}?lang=${selectedLanguage}`}
-              className="px-4 py-2 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 shadow-lg transition duration-150 ease-in-out"
-            >
-              Prev
-            </Link>
+          <Link
+  href={prev >= 1 ? `${prev}-${cleanNextUrl}?lang=${selectedLanguage}` : '#'}
+  className={`px-4 py-2 bg-green-500 text-white font-semibold rounded-md shadow-lg transition duration-150 ease-in-out ${
+    prev < 1 ? 'cursor-not-allowed bg-green-300 shadow-sm' : 'hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50'
+  }`}
+  
+>
+  Prev
+</Link>
             <SwitchLang
               selectedLanguage={selectedLanguage}
               selectedFlag={selectedFlag}
               questionNumber={onlyNumberNoText}
-            
             />
 
             <Link
@@ -134,6 +137,9 @@ export default async function Page(props: any) {
             </Link>
           </div>
         </Box>
+        <div className="text-center p-6">
+          <span>{data.order} of 301</span>
+        </div>
       </div>
     </>
   );
