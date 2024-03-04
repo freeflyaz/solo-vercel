@@ -14,37 +14,42 @@ function SwitchLang({
   searchParamOldLang
 }) {
   // Initialize the flags with German as the top flag and the selected flag as the bottom flag
-  const [topFlag, setTopFlag] = useState(languageFlags[searchParamOldLang]);
-  const [bottomFlag, setBottomFlag] = useState(selectedFlag);
-  const [switchLanguage, setSwitchLanguage] = useState('de');
+  // const [topFlag, setTopFlag] = useState(languageFlags[searchParamOldLang]);
+  // const [bottomFlag, setBottomFlag] = useState(selectedFlag);
+  // const [switchLanguage, setSwitchLanguage] = useState('de');
   //const [mysearchParamOldLang, setSearchParamOldLang] = useState(searchParamOldLang)
 
   const router = useRouter();
   //console.log('before click: ', topFlag, bottomFlag);
 
-  useEffect(() => {
-    console.log('topFlag Changed: ', topFlag);
+  // useEffect(() => {
+  //   console.log('topFlag Changed: ', topFlag);
+  //   console.log('bottomFlag Changed: ', bottomFlag);
+  //  // console.log('switchLanguage Changed: ', switchLanguage);
 
-  }, [topFlag]);
+  // }, [topFlag]);
+  let topFlag = languageFlags[searchParamOldLang];
+  let bottomFlag = selectedFlag;
 
   const flip = async () => {
- 
-    setTopFlag(bottomFlag);
-    setBottomFlag(topFlag);
-    setSwitchLanguage(topFlag);
-    
-
-    const languageCode = countryToLanguage[switchLanguage];
+    //   setTopFlag(bottomFlag);
+    //    setBottomFlag(topFlag);
+    //setSwitchLanguage(bottomFlag);
+    if (!topFlag) {
+      topFlag = 'de';
+      if (bottomFlag === 'de') {
+        bottomFlag = 'en';
+      }
+    }
+    const languageCode = countryToLanguage[topFlag];
     console.log('languageCode: ', languageCode);
 
     const data = await getData(questionNumber, languageCode);
 
-    
     const pushUrl = `/ssr/${questionNumber}-${cleanUrl(
       data.name
     )}?lang=${languageCode}&oldLang=${selectedLanguage}`;
 
-    
     router.push(pushUrl);
   };
 

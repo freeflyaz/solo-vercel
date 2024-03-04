@@ -57,8 +57,10 @@ export default async function Page(props: any) {
   
   console.log('pages: Page(): searchParamOldLang', searchParamOldLang);
 
-
+  
+console.log(searchParams);
   const data = await getData(onlyNumberNoText, searchParams);
+  if (data  === undefined) return null;
 
   let next = parseInt(data.order) + 1;
   let prev = parseInt(data.order) - 1;
@@ -149,7 +151,7 @@ export default async function Page(props: any) {
             />
 
             <Link
-              href={`${next}-${cleanNextUrl}?lang=${selectedLanguage}`}
+              href={`${next}-${cleanNextUrl}?lang=${selectedLanguage}&oldLang=${searchParamOldLang}`}
               className="px-4 py-2 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 shadow-lg transition duration-150 ease-in-out"
             >
               Next
