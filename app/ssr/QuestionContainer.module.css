@@ -10,13 +10,7 @@
   flex-direction: row;
   padding-top: 15px;
 }
-/* .arrow-left {
-    
-      transform: translate(105px,-15px);
-    }
-    .arrow-right {
-      transform: translate(-100px, 17px);
-    } */
+
 
 .roundButton {
   position: relative;
@@ -59,10 +53,7 @@
   transform: translate(-20px, 17px);
 }
 
-/* Add this to your Container.module.css */
 .roundButtonDisabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
-
-/* Additional styles for other elements */

@@ -1,18 +1,9 @@
-// export interface ListProps {
-//     resetQuizKey: number;
-//     eventList: {
-//         correct: string;
-//         name: string;
-//         answerA: string;
-//         answerB: string;
-//         answerC: string;
-//         answerD: string;
-//       };
-//     setReady: (ready: boolean) => void;
-//     handleAnswerSubmission: (isCorrect: boolean) => void;
-//   }
+export type Props = {
+  params: { question: string }
+  searchParams: { [key: string]: string | string[] | undefined }
+}
 
-  export interface EventList {
+export interface EventList {
     name: string;
     order: number;
     correct: string;

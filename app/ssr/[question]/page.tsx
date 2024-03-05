@@ -5,71 +5,52 @@ import styles from '../QuestionContainer.module.css';
 import { cleanUrl, languageFlags } from '../util';
 import { getData } from '../service';
 import Link from 'next/link';
-// import { Metadata, ResolvingMetadata } from 'next';
-
-// type Props = {
-//   params: { id: string; question?: string };
-//   searchParams: { [key: string]: string | string[] | undefined };
-// };
+import { Metadata } from 'next'
+import { Props } from '../../types';
+import { serialize } from 'v8';
 
 export async function generateStaticParams() {
-  //const posts = await fetch('https://.../posts').then((res) => res.json())
  
   return [ 
     {question: '1-Deutschland-ist-ein-Rechtsstaat--Was-ist-damit-gemeint-?lang=de'},
-    {question: '2?lang=de'},
+    {question: '2-Was-verbietet-das-deutsche-Grundgesetz-?lang=de'},
   ]
 }
 
-
-export async function generateMetadata( props : Props, parent: ResolvingMetadata ): Promise<Metadata> {
-//   let data; //
-//  const api_url = process.env.API_URL;
-//   // fetch data
-//   try {
-//     // const response = await fetch(`${api_url}/api/${params.question}?lang=${searchParams.lang}`);
-//      const response = await fetch(`http://localhost:3000/api/${params.question}?lang=${searchParams.lang}`);
-//     if (!response.ok) {
-//       throw new Error(`HTTP error! status: ${response.status}`);
-//     }
-//     data = await response.json();
-//     console.log('title', data.name);
-//   } catch (error) {
-//     console.error("Failed to fetch product:", error);
-
-//   }
+export async function generateMetadata( props : Props ): Promise<Metadata> {
 const onlyNumberNoText = cleanParamsMakeIntoNumber(props);
 //console.log('pages: Page(): onlyNumberNoText', onlyNumberNoText);
 const searchParams = props.searchParams.lang;
 const data = await getData(onlyNumberNoText, searchParams);
 console.log('data', data);
-  const metadata: Metadata =  {
+  
+const metadata: Metadata =  {
     title: 'Einbürgerungstest: ' + data.order + ' - ' + data.name ,
     description: data.order + ' - ' + data.name
   };
-  
-  
-  // const metadata: Metadata =  {
-  //   title: 'gabe',
-  //   description: 'mata'
-  // };
   return metadata;
 }
 
-const cleanParamsMakeIntoNumber = (obj: any) => {
+const cleanParamsMakeIntoNumber = (obj: Props) => {
   //console.log('pages: cleanParams: obj: ', obj);
   const questionStr = obj.params.question;
-  const res = questionStr.split('-', 1)[0];
+  const res = Number(questionStr.split('-', 1)[0]);
   //console.log('pages: cleanParams: res: ', res);
   return res;
 };
 
-export default async function Page(props: any) {
+export default async function Page(props: Props) {
   //console.log('pages here1: Page(): ', props);
   const onlyNumberNoText = cleanParamsMakeIntoNumber(props);
   //console.log('pages: Page(): onlyNumberNoText', onlyNumberNoText);
   const searchParams = props.searchParams.lang;
-  const searchParamOldLang = props.searchParams.oldLang;
+  
+  
+  let searchParamOldLang = 'de';
+  if (typeof props.searchParams.oldLang === 'string') {
+    searchParamOldLang = props.searchParams.oldLang;
+  }
+
 
   console.log('pages: Page(): searchParamOldLang', searchParamOldLang);
 
@@ -81,8 +62,18 @@ export default async function Page(props: any) {
   let prev = parseInt(data.order) - 1;
 
   //console.log(props);
-  let selectedLanguage = searchParams;
-  let selectedFlag = languageFlags[searchParams];
+
+
+
+  let selectedLanguage = 'de';
+  if (typeof searchParams === 'string') {
+    selectedLanguage = searchParams;
+  }
+
+  let selectedFlag = languageFlags['de'];
+  if (typeof searchParams === 'string') {
+    selectedFlag = languageFlags[searchParams];
+  }
   const currentUrl = `${onlyNumberNoText}-${cleanUrl(
     data.name
   )}?lang=${searchParams}`;
@@ -112,14 +103,20 @@ export default async function Page(props: any) {
   
     return href;
   }
+  let lang = 'de';
+  if (typeof props.searchParams.lang === 'string') {
+    lang = props.searchParams.lang;
+  }
 
-  // const flip = () => {};
+  
+
+
   return (
     <>
       <div className={styles.Container}>
         <Flex justifyContent="center" alignItems="center">
           <Box p="4">
-            <LanguageSelector questionNumber={data.order} lang={searchParams} />
+            <LanguageSelector questionNumber={data.order} lang={lang}  />
           </Box>
         </Flex>
         <Box

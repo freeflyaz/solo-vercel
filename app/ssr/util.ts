@@ -26,7 +26,7 @@ export function cleanUrl(url: any) {
   };
 
   // Adjust the flag codes as necessary
-  export const languageFlags: any  = {
+  export const languageFlags: {[key:string] : string}  = {
     ar: 'sy', // Assuming Arabic for Syria
     fa: 'ir', // Persian for Iran
     ps: 'af', // Pashto for Afghanistan, also fa (Dari) is spoken here
@@ -48,7 +48,7 @@ export function cleanUrl(url: any) {
 
 
 
-export const countryToLanguage = {
+export const countryToLanguage: {[key:string] : string} = {
   sy: 'ar', // Syria to Arabic
   ir: 'fa', // Iran to Persian
   af: 'ps', // Afghanistan to Pashto (Note: Dari, also spoken in Afghanistan, is not included here as the mapping is one-to-one)

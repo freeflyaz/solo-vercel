@@ -1,4 +1,4 @@
-export async function getData(questionNumber: Number, lang: string) {
+export async function getData(questionNumber: Number, lang: string | string[] | undefined) {
   //console.log('josh', process.env.NODE_ENV);
   //console.log('josh public', process.env.NEXT_PUBLIC_API_URL);
   
