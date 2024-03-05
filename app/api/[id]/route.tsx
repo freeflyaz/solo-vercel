@@ -1,7 +1,6 @@
 // type definitions not pretty
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/prisma/client';
-import { env } from 'process';
 
 interface googleTrans {
   text: string[];
@@ -41,8 +40,6 @@ export async function GET(
       ];
     }
     // console.log('textsToTranslate array: ', textsToTranslate);
-
-    //const filteredTextsToTranslate = textsToTranslate.filter((text) => text !== undefined) as string[];
 
     const translations = await translateText(textsToTranslate, userLanguage);
    
@@ -102,7 +99,6 @@ async function translateText(
     return data.data.translations.map((t: any) => t.translatedText);
   } catch (error) {
     console.error('Translation error:', error);
-   // throw new Error('Translation service failed');
     return {error: true, message: 'Translation service failed!'};
   }
 }

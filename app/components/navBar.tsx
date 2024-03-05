@@ -1,5 +1,4 @@
 'use client';
-// import Link from 'next/link';
 import React from 'react';
 import {
   Box,
@@ -16,7 +15,6 @@ import {
   MenuItem
 } from '@chakra-ui/react';
 import { ChevronDownIcon, HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
-// import Image from 'next/image'; // Uncomment if you're using Image from 'next/image'
 
 const NavBar = () => {
   const { isOpen, onToggle } = useDisclosure();
@@ -92,17 +90,6 @@ const NavBar = () => {
           flexGrow={1}
           mt={{ base: 4, md: 0 }}
         >
-          {/* <Button
-            size="md"
-            rounded="md"
-            colorScheme="Gray"
-            ml="4"
-            onClick={() => {
-              // handle donate button click
-            }}
-          >
-            Einbürgerungstest App
-          </Button> */}
         </Stack>
       </Box>
     </Flex>

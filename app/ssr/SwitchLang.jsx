@@ -62,9 +62,13 @@ function SwitchLang({
   return (
     <>
       <button
-        className={`${styles.roundButton} ${selectedFlag}`}
+        className={`${styles.roundButton} ${selectedFlag}${ //gabe
+          topFlag === 'de' && bottomFlag === 'de'
+            ? styles.roundButtonDisabled
+            : ''
+        }`}
         onClick={flip}
-        disabled={topFlag === 'de' && bottomFlag === 'de' ? true : false}
+        
       >
         <PiArrowBendUpLeft className={styles.arrowLeft} />
         <div

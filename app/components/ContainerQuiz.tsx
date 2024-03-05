@@ -1,54 +1,55 @@
 import ListQuiz from './ListQuiz';
 import LanguageSelector from './LanguageSelector';
-import { Flex, Box, Button, useColorModeValue  } from '@chakra-ui/react';
+import { Flex, Box, Button, useColorModeValue } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
-import { PiArrowBendUpLeft, PiArrowBendDownRight  } from "react-icons/pi";
-import  ScoreDisplay  from './ScoreDisplay';
+import { PiArrowBendUpLeft, PiArrowBendDownRight } from 'react-icons/pi';
+import ScoreDisplay from './ScoreDisplay';
 import styles from './Container.module.css';
-import { EventList, LanguageFlags } from '../typescript';
-
+import { EventList } from '../types';
+import { languageFlags } from '../ssr/util';
+import { getData } from '../ssr/service';
 
 import '../App.css';
 
-
 const Container = () => {
-  const [eventList, setEventList] = useState<EventList>(
-    {
-      name: 'Was steht nicht im Grundgesetz von Deutschland?"',
-      correct: 'D',
-      answerA: 'hier Religionsfreiheit gilt.',
-      answerB: 'die Menschen Steuern zahlen.',
-      answerC: 'die Menschen das Wahlrecht haben.',
-      answerD: 'hier Meinungsfreiheit gilt.',
-    }
-  );
+  const [eventList, setEventList] = useState<EventList>({
+    name: 'Was steht nicht im Grundgesetz von Deutschland?"',
+    correct: 'D',
+    answerA: 'hier Religionsfreiheit gilt.',
+    answerB: 'die Menschen Steuern zahlen.',
+    answerC: 'die Menschen das Wahlrecht haben.',
+    answerD: 'hier Meinungsfreiheit gilt.'
+  });
   const [selectedLanguage, setSelectedLanguage] = useState('de');
-  const [currentQuestionId, setCurrentQuestionId] = useState(1); // Starting with question 1
+  const [currentQuestionId, setCurrentQuestionId] = useState(1); 
   const [ready, setReady] = useState(true);
-  const [resetQuizKey, setResetQuizKey] = useState(0); // Step 1
-
+  const [resetQuizKey, setResetQuizKey] = useState(0); 
   const [correctCount, setCorrectCount] = useState(0);
-  const [incorrectCount, setIncorrectCount] = useState(0)
-  
+  const [incorrectCount, setIncorrectCount] = useState(0);
 
-  // const [isFlipped, setIsFlipped] = useState(false);
-  const [lastSelectedLanguage, setLastSelectedLanguage] = useState(''); // Track the last selected non-German language
+  const [lastSelectedLanguage, setLastSelectedLanguage] = useState(''); 
   const [selectedFlag, setSelectedFlag] = useState('de');
 
   async function getQuestions() {
-    const baseUrl = process.env.NODE_ENV === 'production'
-    ? 'https://solo-vercel-prisma-generate.vercel.app' // Use your production base URL here
-    : 'http://localhost:3000';   
-    const response = await fetch(`${baseUrl}/api/${currentQuestionId}?lang=${selectedLanguage}`);
+    const baseUrl =
+      process.env.NODE_ENV === 'production'
+        ? 'https://solo-vercel-prisma-generate.vercel.app' // Use your production base URL here
+        : 'http://localhost:3000';
+    const response = await fetch(
+      `${baseUrl}/api/${currentQuestionId}?lang=${selectedLanguage}`
+    );
     const questions = await response.json();
     setEventList(questions);
     console.log('eventList: ', questions);
   }
 
   useEffect(() => {
-    getQuestions();
-    console.log(selectedLanguage);
-   
+   // getQuestions();
+   const fetchQuestions = async () => {
+    const questions = await getData(currentQuestionId, selectedLanguage);
+    setEventList(questions);
+  };
+  fetchQuestions();
   }, [selectedLanguage, currentQuestionId]);
 
   const handleAnswerSubmission = (isCorrect: boolean) => {
@@ -61,122 +62,98 @@ const Container = () => {
 
   const handleLanguageChange = (lang: string) => {
     if (lang !== 'de') {
-      setLastSelectedLanguage(lang); 
+      setLastSelectedLanguage(lang);
       setSelectedFlag('de');
     }
     setSelectedLanguage(lang);
-    
   };
 
   function nextQuestion() {
-    
     setCurrentQuestionId((prevId) => prevId + 1);
     setReady(true);
     setResetQuizKey((prevKey) => prevKey + 1); // Step 3
   }
 
-  // function prevQuestion() {
-  //   setCurrentQuestionId((prevId) => prevId - 1);
-  //   setReady(true);
-  //   setResetQuizKey((prevKey) => prevKey - 1); // Step 3
-  // }
-
   const flip = () => {
-    //setIsFlipped(!isFlipped);
-    // if (isFlipped === false) {
     if (selectedLanguage !== 'de') {
-      // also set the flag inside the flip btn to s
-
-      // If not already flipped, flip to German and save the last selected language lastSelectedLanguage country flag
-
       setLastSelectedLanguage(selectedLanguage);
       setSelectedLanguage('de');
       setSelectedFlag(selectedLanguage);
     } else {
-      // If flipped, revert to the last selected language
-
-      //set language flag to 'de'
       setSelectedLanguage(lastSelectedLanguage);
       setSelectedFlag('de');
     }
   };
 
-  const languageFlags: LanguageFlags = {
-    ar: 'sy', // Assuming Arabic for Syria
-    fa: 'ir', // Persian for Iran
-    ps: 'af', // Pashto for Afghanistan, also fa (Dari) is spoken here
-    tr: 'tr', // Turkish for Turkey
-    en: 'us', // English, using United States as the reference for the English language flag
-    so: 'so', // Somali for Somalia
-    ti: 'er', // Tigrinya for Eritrea
-    ur: 'pk', // Urdu for Pakistan
-    am: 'et', // Amharic for Ethiopia
-    bn: 'bd', // Bengali for Bangladesh
-    ru: 'ru', // Russian for Russia
-    sq: 'al', // Albanian for Albania
-    uk: 'ua', // Ukrainian for Ukraine
-    sr: 'rs', // Serbian for Serbia
-    de: 'de'
-    // Kosovo uses 'xk', a user-assigned code not officially ISO 3166-1
-  };
-  
-  
-
   return (
     <div className={styles.Container}>
       <Flex justifyContent="center" alignItems="center">
-        <Box p="4" >
-      <span className={`flag-icon flag-icon-${languageFlags[selectedLanguage]} mr-2`}></span>
+        <Box p="4">
+          <span
+            className={`flag-icon flag-icon-${languageFlags[selectedLanguage]} mr-2`}
+          ></span>
           <LanguageSelector onLanguageChange={handleLanguageChange} />
         </Box>
       </Flex>
 
       <Box
-      bg={useColorModeValue('white', 'gray.700')}
-      p={8}
-      maxW="md"
-      borderWidth={1} 
-      borderRadius={8}
-      boxShadow="lg"
-      mx="auto"
-    >
-     { eventList && <ListQuiz key={resetQuizKey} resetQuizKey={resetQuizKey} eventList={eventList} setReady={setReady} handleAnswerSubmission={handleAnswerSubmission}
-      />
-     }
-      <div className={styles.navBottom}>
-      {/* <Button colorScheme="green" onClick={() => prevQuestion()} isDisabled={ready}>Prev</Button> */}
-      
+        bg={useColorModeValue('white', 'gray.700')}
+        p={8}
+        maxW="md"
+        borderWidth={1}
+        borderRadius={8}
+        boxShadow="lg"
+        mx="auto"
+      >
+        {eventList && (
+          <ListQuiz
+            key={resetQuizKey}
+            resetQuizKey={resetQuizKey}
+            eventList={eventList}
+            setReady={setReady}
+            handleAnswerSubmission={handleAnswerSubmission}
+          />
+        )}
+        <div className={styles.navBottom}>
+          {/* <Button colorScheme="green" onClick={() => prevQuestion()} isDisabled={ready}>Prev</Button> */}
 
+          <button
+            className={`${styles.roundButton} ${
+              selectedLanguage === 'de' && selectedFlag === 'de'
+                ? styles.roundButtonDisabled
+                : ''
+            }`}
+            onClick={() => flip()}
+            disabled={
+              selectedLanguage === 'de' && selectedFlag === 'de' ? true : false
+            }
+          >
+            <PiArrowBendUpLeft className={styles.arrowLeft} />
+            <div
+              className={`flag-icon flag-icon-${languageFlags[selectedLanguage]} ${styles.flagRight}`}
+            ></div>
+            <div
+              className={`flag-icon flag-icon-${languageFlags[selectedFlag]} ${styles.flagLeft}`}
+            ></div>
+            <PiArrowBendDownRight className={styles.arrowRight} />
+          </button>
 
-
-<button 
-className={`${styles.roundButton} ${selectedLanguage === 'de' && selectedFlag === 'de' ? styles.roundButtonDisabled : ''}`}
- onClick={() => flip()}
- disabled={selectedLanguage === 'de' && selectedFlag === 'de' ? true : false} 
->
-    <PiArrowBendUpLeft className={styles.arrowLeft}/>
-    <div className={`flag-icon flag-icon-${languageFlags[selectedLanguage]} ${styles.flagRight}`}></div>
-    <div className={`flag-icon flag-icon-${languageFlags[selectedFlag]} ${styles.flagLeft}`}></div>
-    <PiArrowBendDownRight className={styles.arrowRight}/>
-  </button>
-
-  
-
-
-  <ScoreDisplay correctCount={correctCount} incorrectCount={incorrectCount} />
-  <Button colorScheme="green" onClick={() => nextQuestion()} isDisabled={ready}>Next</Button>
-      </div>
-
-     
+          <ScoreDisplay
+            correctCount={correctCount}
+            incorrectCount={incorrectCount}
+          />
+          <Button
+            colorScheme="green"
+            onClick={() => nextQuestion()}
+            isDisabled={ready}
+          >
+            Next
+          </Button>
+        </div>
       </Box>
 
-
-      
-
       <div className="text-center p-6">
-      <span>{currentQuestionId} of 301</span>
-
-       
+        <span>{currentQuestionId} of 301</span>
       </div>
     </div>
   );
