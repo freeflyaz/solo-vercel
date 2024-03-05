@@ -5,27 +5,29 @@ import styles from '../QuestionContainer.module.css';
 import { cleanUrl, languageFlags } from '../util';
 import { getData } from '../service';
 import Link from 'next/link';
-import { Metadata } from 'next'
+import { Metadata } from 'next';
 import { Props } from '../../types';
 import { serialize } from 'v8';
 
 export async function generateStaticParams() {
- 
-  return [ 
-    {question: '1-Deutschland-ist-ein-Rechtsstaat--Was-ist-damit-gemeint-?lang=de'},
-    {question: '2-Was-verbietet-das-deutsche-Grundgesetz-?lang=de'},
-  ]
+  return [
+    {
+      question:
+        '1-Deutschland-ist-ein-Rechtsstaat--Was-ist-damit-gemeint-?lang=de'
+    },
+    { question: '2-Was-verbietet-das-deutsche-Grundgesetz-?lang=de' }
+  ];
 }
 
-export async function generateMetadata( props : Props ): Promise<Metadata> {
-const onlyNumberNoText = cleanParamsMakeIntoNumber(props);
-//console.log('pages: Page(): onlyNumberNoText', onlyNumberNoText);
-const searchParams = props.searchParams.lang;
-const data = await getData(onlyNumberNoText, searchParams);
-console.log('data', data);
-  
-const metadata: Metadata =  {
-    title: 'Einbürgerungstest: ' + data.order + ' - ' + data.name ,
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const onlyNumberNoText = cleanParamsMakeIntoNumber(props);
+  //console.log('pages: Page(): onlyNumberNoText', onlyNumberNoText);
+  const searchParams = props.searchParams.lang;
+  const data = await getData(onlyNumberNoText, searchParams);
+  console.log('data', data);
+
+  const metadata: Metadata = {
+    title: 'Einbürgerungstest: ' + data.order + ' - ' + data.name,
     description: data.order + ' - ' + data.name
   };
   return metadata;
@@ -44,13 +46,11 @@ export default async function Page(props: Props) {
   const onlyNumberNoText = cleanParamsMakeIntoNumber(props);
   //console.log('pages: Page(): onlyNumberNoText', onlyNumberNoText);
   const searchParams = props.searchParams.lang;
-  
-  
+
   let searchParamOldLang = 'de';
   if (typeof props.searchParams.oldLang === 'string') {
     searchParamOldLang = props.searchParams.oldLang;
   }
-
 
   console.log('pages: Page(): searchParamOldLang', searchParamOldLang);
 
@@ -62,8 +62,6 @@ export default async function Page(props: Props) {
   let prev = parseInt(data.order) - 1;
 
   //console.log(props);
-
-
 
   let selectedLanguage = 'de';
   if (typeof searchParams === 'string') {
@@ -91,7 +89,7 @@ export default async function Page(props: Props) {
 
   function generateHref() {
     let href = '#'; // Default URL if none of the conditions are met
-  
+
     if (prev >= 1 && searchParamOldLang === undefined) {
       // Condition 1: Previous page exists and 'searchParamOldLang' is undefined
       href = `${prev}-${cleanNextUrl}?lang=${selectedLanguage}`;
@@ -100,7 +98,7 @@ export default async function Page(props: Props) {
       // It seems like there might be a mistake in using `next` instead of `prev` based on your description
       href = `${prev}-${cleanNextUrl}?lang=${selectedLanguage}&oldLang=${searchParamOldLang}`;
     }
-  
+
     return href;
   }
   let lang = 'de';
@@ -108,15 +106,12 @@ export default async function Page(props: Props) {
     lang = props.searchParams.lang;
   }
 
-  
-
-
   return (
     <>
       <div className={styles.Container}>
         <Flex justifyContent="center" alignItems="center">
           <Box p="4">
-            <LanguageSelector questionNumber={data.order} lang={lang}  />
+            <LanguageSelector questionNumber={data.order} lang={lang} />
           </Box>
         </Flex>
         <Box

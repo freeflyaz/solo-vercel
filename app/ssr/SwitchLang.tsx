@@ -8,15 +8,19 @@ import { getData } from './service';
 import { cleanUrl, countryToLanguage, languageFlags } from './util';
 import internal from 'stream';
 
-interface  SwitchLangProps  {
+interface SwitchLangProps {
   selectedLanguage: string;
   selectedFlag: string;
   questionNumber: number;
   searchParamOldLang: string;
-};
+}
 
-function SwitchLang({ selectedLanguage,  selectedFlag, questionNumber,  searchParamOldLang } : SwitchLangProps) {
-
+function SwitchLang({
+  selectedLanguage,
+  selectedFlag,
+  questionNumber,
+  searchParamOldLang
+}: SwitchLangProps) {
   const router = useRouter();
 
   let topFlag = languageFlags[searchParamOldLang];
@@ -49,13 +53,13 @@ function SwitchLang({ selectedLanguage,  selectedFlag, questionNumber,  searchPa
   return (
     <>
       <button
-        className={`${styles.roundButton} ${selectedFlag}${ //gabe
+        className={`${styles.roundButton} ${selectedFlag}${
+          //gabe
           topFlag === 'de' && bottomFlag === 'de'
             ? styles.roundButtonDisabled
             : ''
         }`}
         onClick={flip}
-        
       >
         <PiArrowBendUpLeft className={styles.arrowLeft} />
         <div

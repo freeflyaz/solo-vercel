@@ -2,7 +2,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/prisma/client';
 
-interface googleTrans {
+interface GoogleTrans {
   text: string[];
   targetLanguage: string | null;
 }
@@ -42,7 +42,7 @@ export async function GET(
     // console.log('textsToTranslate array: ', textsToTranslate);
 
     const translations = await translateText(textsToTranslate, userLanguage);
-   
+
     if (translations.error) {
       return NextResponse.json(
         {
@@ -75,8 +75,8 @@ export async function GET(
 }
 
 async function translateText(
-  text: googleTrans['text'],
-  targetLanguage: googleTrans['targetLanguage']
+  text: GoogleTrans['text'],
+  targetLanguage: GoogleTrans['targetLanguage']
 ) {
   const apiKey = process.env.API_KEY;
   const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}&format=text`;
@@ -99,6 +99,6 @@ async function translateText(
     return data.data.translations.map((t: any) => t.translatedText);
   } catch (error) {
     console.error('Translation error:', error);
-    return {error: true, message: 'Translation service failed!'};
+    return { error: true, message: 'Translation service failed!' };
   }
 }
