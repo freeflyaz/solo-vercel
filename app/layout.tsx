@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: 'Einbürgerungstest',
   description: 'Einbürgerungstest',
   verification: {
-    google: 'ZvLMEPPGmHtSCxGLhPkpWoL4Gc7yVyg6pKwr35crXWM'
+    google: 'jqSf0MVN1UpmPF9H5sf4lnaOLL0Nj-dvCbf_lgbSH4o'
   }
 };
 
