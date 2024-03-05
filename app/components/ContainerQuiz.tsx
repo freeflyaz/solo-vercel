@@ -18,7 +18,9 @@ const Container = () => {
     answerA: 'hier Religionsfreiheit gilt.',
     answerB: 'die Menschen Steuern zahlen.',
     answerC: 'die Menschen das Wahlrecht haben.',
-    answerD: 'hier Meinungsfreiheit gilt.'
+    answerD: 'hier Meinungsfreiheit gilt.',
+    image: 'n',
+    order: 1,
   });
   const [selectedLanguage, setSelectedLanguage] = useState('de');
   const [currentQuestionId, setCurrentQuestionId] = useState(1); 
@@ -30,21 +32,7 @@ const Container = () => {
   const [lastSelectedLanguage, setLastSelectedLanguage] = useState(''); 
   const [selectedFlag, setSelectedFlag] = useState('de');
 
-  async function getQuestions() {
-    const baseUrl =
-      process.env.NODE_ENV === 'production'
-        ? 'https://solo-vercel-prisma-generate.vercel.app' // Use your production base URL here
-        : 'http://localhost:3000';
-    const response = await fetch(
-      `${baseUrl}/api/${currentQuestionId}?lang=${selectedLanguage}`
-    );
-    const questions = await response.json();
-    setEventList(questions);
-    console.log('eventList: ', questions);
-  }
-
   useEffect(() => {
-   // getQuestions();
    const fetchQuestions = async () => {
     const questions = await getData(currentQuestionId, selectedLanguage);
     setEventList(questions);

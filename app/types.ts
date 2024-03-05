@@ -14,11 +14,13 @@
 
   export interface EventList {
     name: string;
+    order: number;
     correct: string;
     answerA: string;
     answerB: string;
     answerC: string;
     answerD: string;
+    image: string;
   }
 
   export interface ScoreDisplayProps {
