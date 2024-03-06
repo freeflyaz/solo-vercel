@@ -202,12 +202,12 @@
   {
     "order": 21,
     "name": "Welches ist das Wappen der Bundesrepublik Deutschland?",
-    "answerA": "Vier Symbole: 1) einköpfiger Adler auf einem (gelben) Schild. 2) Zwei vereinigte Symbole. 3) stilisiertes Tatzenkreuz. 4) Ährenkranz mit Hammer und Zirkel",
-    "answerB": "1",
-    "answerC": "2",
-    "answerD": "3",
-    "correct": "B",
-    "image": "n"
+    "answerA": "1", 
+    "answerB": "2",
+    "answerC": "3",
+    "answerD": "4",
+    "correct": "A",
+    "image": "y"
   },
   {
     "order": 22,
@@ -542,12 +542,12 @@
   {
     "order": 55,
     "name": "Was zeigt dieses Bild?",
-    "answerA": "Gebäude mit zwei Türmen rechts und links der Fassade, und einer Glaskuppel auf dem Dach mittig",
-    "answerB": "den Bundestagssitz in Berlin",
-    "answerC": "das Bundesverfassungsgericht in Karlsruhe",
-    "answerD": "das Bundesratsgebäude in Berlin",
-    "correct": "B",
-    "image": "n"
+    "answerA": "den Bundestagssitz in Berlin",
+    "answerB": "das Bundesverfassungsgericht in Karlsruhe",
+    "answerC": "das Bundesratsgebäude in Berlin",
+    "answerD": "das Bundeskanzleramt in Berlin",
+    "correct": "A",
+    "image": "y"
   },
   {
     "order": 56,
@@ -692,12 +692,12 @@
   {
     "order": 70,
     "name": "Der deutsche Bundespräsident Gustav Heinemann gibt Helmut Schmidt 1974 die Ernennungsurkunde zum deutschen Bundeskanzler. Was gehört zu den Aufgaben des deutschen Bundespräsidenten / der deutschen Bundespräsidentin?",
-    "answerA": "Gustav Heinemann überreicht Helmut Schmidt die Ernennungsurkunde zum deutschen Bundeskanzler",
-    "answerB": "Er / Sie führt die Regierungsgeschäfte.",
-    "answerC": "Er / Sie kontrolliert die Regierungspartei.",
-    "answerD": "Er / Sie wählt die Minister / Ministerinnen aus.",
-    "correct": "E",
-    "image": "n"
+    "answerA": "Er / Sie führt die Regierungsgeschäfte.",
+    "answerB": "Er / Sie kontrolliert die Regierungspartei.",
+    "answerC": "Er / Sie wählt die Minister / Ministerinnen aus.",
+    "answerD": "Er / Sie schlägt den Kanzler / die Kanzlerin zur Wahl vor.",
+    "correct": "D",
+    "image": "y"
   },
   {
     "order": 71,
@@ -1292,12 +1292,12 @@
   {
     "order": 130,
     "name": "Welcher Stimmzettel wäre bei einer Bundestagswahl gültig?",
-    "answerA": "Eine Grafik mit 4 Stimmzetteln: 1) je eine Stimme in der linken und rechten Spalte. 2) zwei Kreuze rechts. 3) zwei Kreuze links 4) drei Kreuze links",
-    "answerB": "1",
-    "answerC": "2",
-    "answerD": "3",
-    "correct": "B",
-    "image": "n"
+    "answerA": "1",
+    "answerB": "2",
+    "answerC": "3",
+    "answerD": "4",
+    "correct": "A",
+    "image": "y"
   },
   {
     "order": 131,
@@ -1752,12 +1752,12 @@
   {
     "order": 176,
     "name": "Wie waren die Besatzungszonen Deutschlands nach 1945 verteilt?",
-    "answerA": "Deutschland-Karte mit eingezeichneten Besatzungszonen: (1) im Nord-Westen, (2) im Nord-Osten, (3) im Süd-Osten, und (4) im Süd-Westen",
-    "answerB": "1=Großbritannien, 2=Sowjetunion, 3=Frankreich, 4=USA",
-    "answerC": "1=Sowjetunion, 2=Großbritannien, 3=USA, 4=Frankreich",
-    "answerD": "1=Großbritannien, 2=Sowjetunion, 3=USA, 4=Frankreich",
-    "correct": "D",
-    "image": "n"
+    "answerA": "1=Großbritannien, 2=Sowjetunion, 3=Frankreich, 4=USA",
+    "answerB": "1=Sowjetunion, 2=Großbritannien, 3=USA, 4=Frankreich",
+    "answerC": "1=Großbritannien, 2=Sowjetunion, 3=USA, 4=Frankreich",
+    "answerD": "1=Großbritannien, 2=USA, 3=Sowjetunion, 4=Frankreich",
+    "correct": "C",
+    "image": "y"
   },
   {
     "order": 177,
@@ -1802,12 +1802,12 @@
   {
     "order": 181,
     "name": "Was wollte Willy Brandt mit seinem Kniefall 1970 im ehemaligen jüdischen Ghetto in Warschau ausdrücken?",
-    "answerA": "Willy Brandt kniet auf Stufen vor einem Blumenkranz. Im Hintergrund sind viele Zuschauer zu sehen",
-    "answerB": "Er hat sich den ehemaligen Alliierten unterworfen.",
-    "answerC": "Er bat Polen und die polnischen Juden um Vergebung.",
-    "answerD": "Er zeigte seine Demut vor dem Warschauer Pakt.",
-    "correct": "C",
-    "image": "n"
+    "answerA": "Er hat sich den ehemaligen Alliierten unterworfen.",
+    "answerB": "Er bat Polen und die polnischen Juden um Vergebung.",
+    "answerC": "Er zeigte seine Demut vor dem Warschauer Pakt.",
+    "answerD": "Er sprach ein Gebet am Grab des Unbekannten Soldaten.",
+    "correct": "B",
+    "image": "y"
   },
   {
     "order": 182,
@@ -1862,12 +1862,12 @@
   {
     "order": 187,
     "name": "Welcher deutsche Staat hatte eine schwarz-rot-goldene Flagge mit Hammer, Zirkel und Ährenkranz?",
-    "answerA": "Schwarz-rot-goldene Flagge mit Hammer, Zirkel und Ährenkranz",
-    "answerB": "Preußen",
-    "answerC": "Bundesrepublik Deutschland",
-    "answerD": "DDR",
-    "correct": "D",
-    "image": "n"
+    "answerA": "Preußen",
+    "answerB": "Bundesrepublik Deutschland",
+    "answerC": "DDR",
+    "answerD": "Drittes Reich",
+    "correct": "C",
+    "image": "y"
   },
   {
     "order": 188,
@@ -2082,12 +2082,12 @@
   {
     "order": 209,
     "name": "Welches war das Wappen der Deutschen Demokratischen Republik?",
-    "answerA": "Vier Symbole: 1) einköpfiger Adler auf einem (gelben) Schild. 2) Zwei vereinigte Symbole. 3) stilisiertes Tatzenkreuz. 4) Ährenkranz mit Hammer und Zirkel",
-    "answerB": "1",
-    "answerC": "2",
-    "answerD": "3",
-    "correct": "E",
-    "image": "n"
+    "answerA": "1",
+    "answerB": "2",
+    "answerC": "3",
+    "answerD": "4",
+    "correct": "4",
+    "image": "y"
   },
   {
     "order": 210,
@@ -2152,12 +2152,12 @@
   {
     "order": 216,
     "name": "Welches Symbol ist im Plenarsaal des Deutschen Bundestages zu sehen?",
-    "answerA": "Eine Aufnahme im Plenarsaal des Deutschen Bundestages. Im Hintergrund sieht man das hier gefragte Symbol.",
-    "answerB": "die Fahne der Stadt Berlin.",
-    "answerC": "der Bundesadler.",
-    "answerD": "der Reichsadler.",
-    "correct": "C",
-    "image": "n"
+    "answerA": "die Fahne der Stadt Berlin",
+    "answerB": "der Bundesadler",
+    "answerC": "der Reichsadler",
+    "answerD": "die Reichskrone",
+    "correct": "B",
+    "image": "y"
   },
   {
     "order": 217,
@@ -2252,12 +2252,12 @@
   {
     "order": 226,
     "name": "Welche ist die Flagge der Europäischen Union?",
-    "answerA": "Eine Grafik mit 4 Flaggen: 1) gestreift, 2) blau mit kreisförmig angeordneten Sternen, 3) heller Hintergrund, Weltkarte, umrandet von Olivenzweigen, 4)",
-    "answerB": "2",
-    "answerC": "1",
-    "answerD": "4",
-    "correct": "B",
-    "image": "n"
+    "answerA": "2",
+    "answerB": "1",
+    "answerC": "4",
+    "answerD": "3",
+    "correct": "A",
+    "image": "y"
   },
   {
     "order": 227,
@@ -2342,12 +2342,12 @@
   {
     "order": 235,
     "name": "Der französische Staatspräsident François Mitterrand und der deutsche Bundeskanzler Helmut Kohl gedenken in Verdun gemeinsam der Toten beider Weltkriege. Welches Ziel der Europäischen Union wird bei diesem Treffen deutlich?",
-    "answerA": "François Mitterrand und Helmut Kohl stehen vor zwei Blumenkränzen und halten die Hände. Im Hintergrund sieht man viele Zuschauer",
-    "answerB": "Freundschaft zwischen England und Deutschland",
-    "answerC": "Reisefreiheit in alle Länder der EU",
-    "answerD": "Frieden und Sicherheit in den Ländern der EU",
-    "correct": "D",
-    "image": "n"
+    "answerA": "Freundschaft zwischen England und Deutschland",
+    "answerB": "Reisefreiheit in alle Länder der EU",
+    "answerC": "Frieden und Sicherheit in den Ländern der EU",
+    "answerD": "Einheitliche Feiertage in den Ländern der EU",
+    "correct": "C",
+    "image": "y"
   },
   {
     "order": 236,
