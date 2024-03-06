@@ -8,8 +8,8 @@ import { Metadata } from 'next';
 
 
 export const metadata: Metadata = {
-  title: 'Einbürgerungstest',
-  description: 'Einbürgerungstest',
+  title: 'Einbürgerungstest - Leben in Deutschland Test App',
+  description: `Willkommen bei Einbürgerungstest Online – Meistern Sie den 'Leben in Deutschland' Test in Ihrer eigenen Sprache! Beginnen Sie heute Ihre kostenlose Reise und finden Sie heraus, ob Sie bereit sind, mühelos zu bestehen.`,
   verification: {
     google: 'jqSf0MVN1UpmPF9H5sf4lnaOLL0Nj-dvCbf_lgbSH4o'
   }

@@ -69,6 +69,12 @@ const NavBar = () => {
               >
                 Von Frage 1
               </MenuItem>
+              <MenuItem
+                as="a"
+                href="/ssr/31-Die-Zusammenarbeit-von-Parteien-zur-Bildung-einer-Regierung-nennt-man-in-Deutschland--?lang=de"
+              >
+                Von Frage 31
+              </MenuItem>
             </MenuList>
           </Menu>
 
