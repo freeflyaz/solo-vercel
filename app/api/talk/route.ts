@@ -7,13 +7,15 @@ export async function POST (req : NextRequest, res: NextResponse) {
     try {
       const client = new TextToSpeechClient();
       // Simplified request with minimal options
+      const requestBody = await req.json();
       const request = {
-        input: { text: 'Hello, world!' }, // Static text for testing
+        input: { text: requestBody.text }, // Static text for testing
         // Using defaults for voice and audioConfig where possible
         
         voice: { languageCode: 'en-US', ssmlGender: 'NEUTRAL' },
         audioConfig: { audioEncoding: 'MP3' },
       };
+      console.log('gabe3', request.input.text);
 
       const [response] = await client.synthesizeSpeech(request);
       // res.setHeader('Content-Type', 'audio/mp3');
