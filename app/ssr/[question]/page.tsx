@@ -7,7 +7,7 @@ import { getData } from '../service';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { Props } from '../../types';
-import { serialize } from 'v8';
+import TextToSpeechPlayer from '../../talk/TextToSpeechPlayer';
 
 export async function generateStaticParams() {
   return [
@@ -180,6 +180,21 @@ export default async function Page(props: Props) {
           </div>
         </Box>
         <div className="text-center p-6">
+          <TextToSpeechPlayer
+            text={
+              data.name +
+              ' ' +
+              data.answerA +
+              ' ' +
+              data.answerB +
+              ' ' +
+              data.answerC +
+              ' ' +
+              data.answerD
+            }
+            languageCode={selectedLanguage + '-' + selectedFlag}
+            ssmlGender={'MALE'}
+          />
           <span>{data.order} of 301</span>
         </div>
       </div>
