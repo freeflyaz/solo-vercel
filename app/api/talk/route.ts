@@ -12,8 +12,13 @@ export async function POST (req : NextRequest, res: NextResponse) {
         input: { text: requestBody.text }, // Static text for testing
         // Using defaults for voice and audioConfig where possible
         
-        voice: { languageCode: 'en-US', ssmlGender: 'NEUTRAL' },
+        voice: { languageCode: requestBody.languageCode, ssmlGender: requestBody.ssmlGender },
+        //voice: { languageCode: 'de-DE', ssmlGender: 'FEMALE' },
+        //voice: { languageCode: 'es-ES', ssmlGender: 'FEMALE' },
+        
         audioConfig: { audioEncoding: 'MP3' },
+
+
       };
       console.log('gabe3', request.input.text);
       
