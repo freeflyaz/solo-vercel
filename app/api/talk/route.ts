@@ -16,10 +16,12 @@ export async function POST (req : NextRequest, res: NextResponse) {
         audioConfig: { audioEncoding: 'MP3' },
       };
       console.log('gabe3', request.input.text);
+      
 
       const [response] = await client.synthesizeSpeech(request);
       // res.setHeader('Content-Type', 'audio/mp3');
       // res.send(response.audioContent);
+      console.log('Audio Content Length:', response.audioContent.length);
       return new Response(response.audioContent, {headers: {'Content-Type': 'audio/mp3'}});
 
     } catch (error) {
