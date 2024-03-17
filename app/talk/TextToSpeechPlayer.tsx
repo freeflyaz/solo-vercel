@@ -11,10 +11,13 @@ const TextToSpeechPlayer = ({ text, languageCode, ssmlGender, onAudioEnd }: { te
     }
   }
 
+  const api_url = process.env.NEXT_PUBLIC_API_URL;
+  const buildUrl = `${api_url}/api/talk`;
+
   useEffect(() => {
     const getDataPost = async (text: string, { languageCode, ssmlGender }: { languageCode: string, ssmlGender: string }) => {
       try {
-        const response = await fetch('http://localhost:3000/api/talk', {
+        const response = await fetch(buildUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
