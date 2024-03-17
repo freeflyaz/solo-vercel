@@ -1,3 +1,5 @@
+'use client';
+
 import LanguageSelector from '../QuestionLangSelect';
 import { Flex, Box, Stack } from '@chakra-ui/react';
 import SwitchLang from '../SwitchLang';
@@ -9,29 +11,29 @@ import { Metadata } from 'next';
 import { Props } from '../../types';
 import TextToSpeechPlayer from '../../talk/TextToSpeechPlayer';
 
-export async function generateStaticParams() {
-  return [
-    {
-      question:
-        '1-Deutschland-ist-ein-Rechtsstaat--Was-ist-damit-gemeint-?lang=de'
-    },
-    { question: '2-Was-verbietet-das-deutsche-Grundgesetz-?lang=de' }
-  ];
-}
+// export async function generateStaticParams() {
+//   return [
+//     {
+//       question:
+//         '1-Deutschland-ist-ein-Rechtsstaat--Was-ist-damit-gemeint-?lang=de'
+//     },
+//     { question: '2-Was-verbietet-das-deutsche-Grundgesetz-?lang=de' }
+//   ];
+// }
 
-export async function generateMetadata(props: Props): Promise<Metadata> {
-  const onlyNumberNoText = cleanParamsMakeIntoNumber(props);
-  //console.log('pages: Page(): onlyNumberNoText', onlyNumberNoText);
-  const searchParams = props.searchParams.lang;
-  const data = await getData(onlyNumberNoText, searchParams);
-  console.log('data', data);
+// export async function generateMetadata(props: Props): Promise<Metadata> {
+//   const onlyNumberNoText = cleanParamsMakeIntoNumber(props);
+//   //console.log('pages: Page(): onlyNumberNoText', onlyNumberNoText);
+//   const searchParams = props.searchParams.lang;
+//   const data = await getData(onlyNumberNoText, searchParams);
+//   console.log('data', data);
 
-  const metadata: Metadata = {
-    title: 'Einbürgerungstest: ' + data.order + ' - ' + data.name,
-    description: data.order + ' - ' + data.name
-  };
-  return metadata;
-}
+//   const metadata: Metadata = {
+//     title: 'Einbürgerungstest: ' + data.order + ' - ' + data.name,
+//     description: data.order + ' - ' + data.name
+//   };
+//   return metadata;
+// }
 
 const cleanParamsMakeIntoNumber = (obj: Props) => {
   //console.log('pages: cleanParams: obj: ', obj);
@@ -183,17 +185,29 @@ export default async function Page(props: Props) {
           <TextToSpeechPlayer
             text={
               data.name +
-              ' ' +
+              ', ' +
               data.answerA +
-              ' ' +
+              ', ' +
               data.answerB +
-              ' ' +
+              ', ' +
               data.answerC +
-              ' ' +
-              data.answerD
+              ', ' +
+              data.answerD +
+              ', ' +
+              'antworte: ' + data['answer' + data.correct]
+              
+              
+              
+
             }
             languageCode={selectedLanguage + '-' + selectedFlag}
             ssmlGender={'MALE'}
+            onAudioEnd={() => {
+              // Logic to handle end of audio
+              // For example, navigate to the next question
+              const nextQuestionUrl = `${next}-${cleanNextUrl}?lang=${selectedLanguage}`; // Implement this function based on your routing logic
+              window.location.href = nextQuestionUrl; // or use Next.js Router for client-side routing
+            }}
           />
           <span>{data.order} of 301</span>
         </div>
