@@ -2,7 +2,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 
-const TextToSpeechPlayer = ({ text, languageCode, ssmlGender, onAudioEnd }) => {
+const TextToSpeechPlayer = ({ text, languageCode, ssmlGender, onAudioEnd }: { text: string, languageCode: string, ssmlGender: string, onAudioEnd: () => void }) => {
   const [audioUrl, setAudioUrl] = useState('');
 
   const handleAudioEnd = () => {
@@ -12,7 +12,7 @@ const TextToSpeechPlayer = ({ text, languageCode, ssmlGender, onAudioEnd }) => {
   }
 
   useEffect(() => {
-    const getDataPost = async (text, { languageCode, ssmlGender }) => {
+    const getDataPost = async (text: string, { languageCode, ssmlGender }: { languageCode: string, ssmlGender: string }) => {
       try {
         const response = await fetch('http://localhost:3000/api/talk', {
           method: 'POST',
