@@ -11,7 +11,6 @@ export async function GET(
   request: NextRequest,
   { params }: { params: { id: number } }
 ) {
-  //console.log('From API. passed to api: ' + params.id + ' - ' + request.nextUrl.searchParams.get('lang')); //You can change this and just pass a string and not an object//gabe
   try {
     const question = await prisma.question.findUnique({
       where: { order: Number(params.id) }
@@ -22,11 +21,8 @@ export async function GET(
         { error: 'question not found' },
         { status: 404 }
       );
-    // console.log(params.id);
     const lang = request.nextUrl.searchParams.get('lang');
-    //   console.log(lang);
     const userLanguage = lang;
-    //console.log(question);
     let textsToTranslate: string[] = [];
 
     if (question) {
@@ -39,7 +35,6 @@ export async function GET(
         question.correct
       ];
     }
-    // console.log('textsToTranslate array: ', textsToTranslate);
 
     const translations = await translateText(textsToTranslate, userLanguage);
 
@@ -51,7 +46,6 @@ export async function GET(
         { status: 500 }
       );
     }
-    //console.log('translations:', translations);
 
     if (question) {
       question.name = translations[0];
@@ -90,12 +84,9 @@ async function translateText(
       body: JSON.stringify({
         q: text,
         target: targetLanguage
-        // Assuming targetLanguage is never null as the API is currently only used by me
-        // and the workflow ensures targetLanguage is always set.
       })
     });
     const data = await response.json();
-    //console.log(data.data.translations[1].translatedText);
     return data.data.translations.map((t: any) => t.translatedText);
   } catch (error) {
     console.error('Translation error:', error);

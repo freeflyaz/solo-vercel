@@ -67,13 +67,13 @@ const NavBar = () => {
                 as="a"
                 href="/ssr/1-Deutschland-ist-ein-Rechtsstaat--Was-ist-damit-gemeint-?lang=de"
               >
-                Von Frage 1
+                Fragen 1 - 30
               </MenuItem>
               <MenuItem
                 as="a"
-                href="/ssr/31-Die-Zusammenarbeit-von-Parteien-zur-Bildung-einer-Regierung-nennt-man-in-Deutschland--?lang=de"
+                href="/ssr/31-Die-Zusammenarbeit-von-Parteien-zur-Bildung-einer-Regierung-nennt-man-in-Deutschland--?lang=de&oldLang=de"
               >
-                Von Frage 31
+                Fragen 31 - 60
               </MenuItem>
             </MenuList>
           </Menu>
@@ -84,7 +84,7 @@ const NavBar = () => {
             </MenuButton>
             <MenuList>
               <MenuItem as="a" href="/">
-                Go
+                Starte Test
               </MenuItem>
             </MenuList>
           </Menu>

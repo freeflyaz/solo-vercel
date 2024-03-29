@@ -38,7 +38,6 @@ function SwitchLang({
       }
     }
     const languageCode = countryToLanguage[topFlag];
-    console.log('languageCode: ', languageCode);
 
     const data = await getData(questionNumber, languageCode);
 
@@ -48,7 +47,6 @@ function SwitchLang({
 
     router.push(pushUrl);
   };
-  console.log(topFlag, bottomFlag);
 
   return (
     <>
