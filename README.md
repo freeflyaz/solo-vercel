@@ -19,7 +19,7 @@ To set up Einbürgerungstest Online locally, follow these steps:
 
 1. Clone the repo:
 ```
-git clone <repository-url>
+git clone https://github.com/freeflyaz/solo-vercel.git
 ```
 2. Install the necessary dependencies:
 
