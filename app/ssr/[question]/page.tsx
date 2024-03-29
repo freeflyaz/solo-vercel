@@ -9,44 +9,15 @@ import { getData } from '../service';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { Props } from '../../types';
-import TextToSpeechPlayer from '../../talk/TextToSpeechPlayer';
-
-// export async function generateStaticParams() {
-//   return [
-//     {
-//       question:
-//         '1-Deutschland-ist-ein-Rechtsstaat--Was-ist-damit-gemeint-?lang=de'
-//     },
-//     { question: '2-Was-verbietet-das-deutsche-Grundgesetz-?lang=de' }
-//   ];
-// }
-
-// export async function generateMetadata(props: Props): Promise<Metadata> {
-//   const onlyNumberNoText = cleanParamsMakeIntoNumber(props);
-//   //console.log('pages: Page(): onlyNumberNoText', onlyNumberNoText);
-//   const searchParams = props.searchParams.lang;
-//   const data = await getData(onlyNumberNoText, searchParams);
-//   console.log('data', data);
-
-//   const metadata: Metadata = {
-//     title: 'Einbürgerungstest: ' + data.order + ' - ' + data.name,
-//     description: data.order + ' - ' + data.name
-//   };
-//   return metadata;
-// }
 
 const cleanParamsMakeIntoNumber = (obj: Props) => {
-  //console.log('pages: cleanParams: obj: ', obj);
   const questionStr = obj.params.question;
   const res = Number(questionStr.split('-', 1)[0]);
-  //console.log('pages: cleanParams: res: ', res);
   return res;
 };
 
 export default async function Page(props: Props) {
-  //console.log('pages here1: Page(): ', props);
   const onlyNumberNoText = cleanParamsMakeIntoNumber(props);
-  //console.log('pages: Page(): onlyNumberNoText', onlyNumberNoText);
   const searchParams = props.searchParams.lang;
 
   let searchParamOldLang = 'de';
@@ -54,16 +25,11 @@ export default async function Page(props: Props) {
     searchParamOldLang = props.searchParams.oldLang;
   }
 
-  console.log('pages: Page(): searchParamOldLang', searchParamOldLang);
-
-  console.log(searchParams);
   const data = await getData(onlyNumberNoText, searchParams);
   if (data === undefined) return null;
 
   let next = parseInt(data.order) + 1;
   let prev = parseInt(data.order) - 1;
-
-  //console.log(props);
 
   let selectedLanguage = 'de';
   if (typeof searchParams === 'string') {
@@ -84,20 +50,15 @@ export default async function Page(props: Props) {
       : 'mt-4 bg-gray-100 hover:bg-gray-200 text-black  py-2 px-4 rounded w-full text-left';
   };
 
-  //console.log(next, searchParams);
   const nextQuestion = await getData(next, searchParams);
   const cleanNextUrl = cleanUrl(nextQuestion.name);
-  //console.log('nextQuestion', nextQuestion.name);
 
   function generateHref() {
-    let href = '#'; // Default URL if none of the conditions are met
+    let href = '#';
 
     if (prev >= 1 && searchParamOldLang === undefined) {
-      // Condition 1: Previous page exists and 'searchParamOldLang' is undefined
       href = `${prev}-${cleanNextUrl}?lang=${selectedLanguage}`;
     } else if (prev >= 1 && searchParamOldLang !== undefined) {
-      // Condition 2: Previous page exists and 'searchParamOldLang' is defined
-      // It seems like there might be a mistake in using `next` instead of `prev` based on your description
       href = `${prev}-${cleanNextUrl}?lang=${selectedLanguage}&oldLang=${searchParamOldLang}`;
     }
 
@@ -182,33 +143,7 @@ export default async function Page(props: Props) {
           </div>
         </Box>
         <div className="text-center p-6">
-          <TextToSpeechPlayer
-            text={
-              data.name +
-              ', ' +
-              data.answerA +
-              ', ' +
-              data.answerB +
-              ', ' +
-              data.answerC +
-              ', ' +
-              data.answerD +
-              ', ' +
-              'antworte: ' + data['answer' + data.correct]
-              
-              
-              
-
-            }
-            languageCode={selectedLanguage + '-' + selectedFlag}
-            ssmlGender={'MALE'}
-            onAudioEnd={() => {
-              // Logic to handle end of audio
-              // For example, navigate to the next question
-              const nextQuestionUrl = `${next}-${cleanNextUrl}?lang=${selectedLanguage}`; // Implement this function based on your routing logic
-              window.location.href = nextQuestionUrl; // or use Next.js Router for client-side routing
-            }}
-          />
+        
           <span>{data.order} of 301</span>
         </div>
       </div>
