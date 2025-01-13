@@ -42,26 +42,6 @@ const TextToSpeechPlayer = ({ text, languageCode, ssmlGender, onAudioEnd }: { te
     }
   }, [text, languageCode, ssmlGender]);
 
-  // useEffect(() => {
-  //   let audioElement = null; // Initialize outside so it can be accessed in cleanup
-  
-  //   if (audioUrl) {
-  //     const timer = setTimeout(() => {
-  //       audioElement = new Audio(audioUrl);
-  //       audioElement.play();
-  //       audioElement.onended = onAudioEnd;
-  //     }, 200);
-  
-  //     return () => {
-  //       clearTimeout(timer);
-  //       if (audioElement) {
-  //         audioElement.pause(); // Pause the audio if the component unmounts
-  //         audioElement.src = ''; // Help with cleanup
-  //       }
-  //     };
-  //   }
-  // }, [audioUrl, onAudioEnd, 200]);
-
   return (
     <>
       {audioUrl && (

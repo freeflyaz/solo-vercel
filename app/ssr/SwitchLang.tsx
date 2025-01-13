@@ -1,12 +1,11 @@
 'use client';
-import React, { useState, useEffect } from 'react'; // Import useState directly from 'react'
+import React from 'react'; // Import useState directly from 'react'
 import { useRouter } from 'next/navigation'; // Ensure this is the correct import path for useRouter
 import { PiArrowBendUpLeft, PiArrowBendDownRight } from 'react-icons/pi';
 import styles from './SwitchLang.module.css';
 import 'flag-icon-css/css/flag-icons.min.css'; // For flag icons
 import { getData } from './service';
 import { cleanUrl, countryToLanguage, languageFlags } from './util';
-import internal from 'stream';
 
 interface SwitchLangProps {
   selectedLanguage: string;
