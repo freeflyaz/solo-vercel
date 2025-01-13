@@ -1,5 +1,5 @@
 'use client';
-import React from 'react'; // Import useState directly from 'react'
+import React, { useState } from 'react'; // Import useState directly from 'react'
 import { useRouter } from 'next/navigation'; // Ensure this is the correct import path for useRouter
 import { PiArrowBendUpLeft, PiArrowBendDownRight } from 'react-icons/pi';
 import styles from './SwitchLang.module.css';
