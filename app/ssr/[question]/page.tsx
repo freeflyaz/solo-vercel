@@ -7,7 +7,6 @@ import styles from '../QuestionContainer.module.css';
 import { cleanUrl, languageFlags } from '../util';
 import { getData } from '../service';
 import Link from 'next/link';
-import { Metadata } from 'next';
 import { Props } from '../../types';
 
 const cleanParamsMakeIntoNumber = (obj: Props) => {
